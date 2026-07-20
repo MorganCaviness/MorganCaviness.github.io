@@ -25,10 +25,47 @@ body {
     background-color: var(--bg-color);
     color: var(--text-main);
     line-height: 1.6;
+    cursor: none; 
+}
+
+a, button, .project-card, .extra-media img {
+    cursor: none !important;
+}
+
+/* Ensure text fields show a proper I-beam text cursor and accept clicks reliably */
+input, textarea {
+    cursor: text !important;
 }
 
 /* =========================================
-   2. NAVIGATION
+   2. CUSTOM SCROLLBAR
+========================================= */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--bg-color);
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color); 
+    border-left: 1px solid rgba(56, 189, 248, 0.1); 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent); 
+    border-radius: 10px;
+    border: 3px solid var(--bg-color); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-alt); 
+}
+
+/* =========================================
+   3. NAVIGATION
 ========================================= */
 .navbar {
     display: flex;
@@ -61,17 +98,11 @@ body {
 }
 
 /* =========================================
-   3. HERO SECTION
+   4. PARTICLE WRAPPER (HERO + PORTFOLIO)
 ========================================= */
-/* --- 3. Hero Section --- */
-.hero {
-    padding: 4rem 5% 2rem 5%; 
-    display: flex;
-    flex-direction: column;
-    /* REMOVED: max-width: 800px; so the canvas stretches full width! */
-    animation: fadeIn 1s ease-out;
-    
-    position: relative; 
+.particle-wrapper {
+    position: relative;
+    overflow: hidden; 
 }
 
 #particle-canvas {
@@ -81,7 +112,18 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0; 
-    pointer-events: none; /* Lets the user click through the canvas to interact with the page */
+    pointer-events: none; 
+}
+
+/* =========================================
+   5. HERO SECTION & STATUS BADGE
+========================================= */
+.hero {
+    padding: 4rem 5% 2rem 5%; 
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 1s ease-out;
+    position: relative; 
 }
 
 .hero > *:not(canvas) {
@@ -89,38 +131,71 @@ body {
     z-index: 1;
 }
 
+/* =========================================
+   STATUS BADGE
+========================================= */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    
+    /* Positioned cleanly below the navbar, aligned with site padding */
+    margin: 1.5rem 5% 0 5%;
+    width: max-content;
+    position: relative;
+    z-index: 1;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulseGlow 1.5s infinite;
+}
+
+@keyframes pulseGlow {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
 .greeting {
     color: var(--accent);
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
 }
 
 h1 {
     font-size: clamp(3rem, 5vw, 5rem);
-    line-height: 1.2; /* Slightly increased to prevent the 'g' from being cut off */
-    padding-bottom: 0.2rem; /* Adds breathing room for the text */
+    line-height: 1.2; 
+    padding-bottom: 0.2rem; 
     margin-bottom: 0.5rem;
     position: relative;
     width: max-content;
-    z-index: 1; /* Establishes the stacking layer */
+    z-index: 1; 
 }
-/* The Curved, Glowing Underline */
+
 h1::after {
     content: '';
     position: absolute;
-    bottom: 12px; /* Sits perfectly behind the bottom curve of the 'g' */
+    bottom: 12px; 
     left: 0;
     width: 100%;
     height: 6px; 
-    border-radius: 4px; /* Flat, slightly rounded edges */
-    
+    border-radius: 4px; 
     background: linear-gradient(90deg, var(--accent), var(--accent-alt));
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.5); 
-    
-    z-index: -1; /* Safely pushes the line behind the text */
-    
+    z-index: -1; 
     transform: scaleX(0); 
-    transform-origin: left; /* Starts from the left */
+    transform-origin: left; 
     animation: drawLine 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     animation-delay: 0.6s; 
 }
@@ -144,7 +219,6 @@ h1::after {
     margin-bottom: 0; 
 }
 
-/* Optional Button Styles (Kept in case you use them later) */
 .btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
@@ -162,16 +236,13 @@ h1::after {
 }
 
 /* =========================================
-   4. PORTFOLIO GRID
+   6. PORTFOLIO GRID & TAG FILTERING
 ========================================= */
 .portfolio-section {
     padding: 2rem 5% 5rem 5%; 
-    
-    /* NEW: This traps the canvas strictly inside the portfolio section */
     position: relative; 
 }
 
-/* NEW: Ensure the title and grid sit safely on top of the particles */
 .portfolio-section .section-title, 
 .portfolio-section .project-grid {
     position: relative;
@@ -181,6 +252,35 @@ h1::after {
 .section-title {
     font-size: 2rem;
     margin-bottom: 3rem;
+}
+
+.filter-banner {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--card-bg);
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--accent);
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
+}
+
+.filter-banner button {
+    background: none;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-banner button:hover {
+    background-color: var(--accent);
+    color: var(--bg-color);
 }
 
 .project-grid {
@@ -194,19 +294,13 @@ h1::after {
     border-radius: 8px;
     overflow: hidden;
     position: relative;
-    cursor: pointer;
     min-height: 250px;
     opacity: 0; 
     animation: slideUpCard 0.8s ease-out forwards;
-    
-    /* NEW: A subtle base shadow so it doesn't look completely flat */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    
-    /* UPDATED: Added box-shadow to the transition list so it animates smoothly */
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 
-/* NEW: The intense drop shadow that triggers when the mouse enters the card */
 .project-card:hover {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
 }
@@ -255,13 +349,55 @@ h1::after {
     font-family: monospace;
 }
 
+#modal-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-family: monospace;
+    margin-bottom: 1rem;
+}
+
+.tech-tag {
+    color: var(--accent);
+    background-color: rgba(56, 189, 248, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+    display: inline-block;
+}
+
+.tech-tag:hover {
+    background-color: var(--accent);
+    color: var(--bg-color);
+}
+
 .project-card:nth-child(1) { animation-delay: 0.2s; }
 .project-card:nth-child(2) { animation-delay: 0.4s; }
 .project-card:nth-child(3) { animation-delay: 0.6s; }
 .project-card:nth-child(4) { animation-delay: 0.8s; }
 
+.emitter-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px; 
+    background: linear-gradient(90deg, transparent, var(--accent), var(--text-main), var(--accent), transparent);
+    box-shadow: 0 -4px 15px rgba(56, 189, 248, 0.6), 0 -10px 30px rgba(56, 189, 248, 0.2);
+    z-index: 2; 
+    transform: scaleX(0); 
+    transform-origin: center; 
+    animation: igniteEmitter 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: 0.3s; 
+}
+
+@keyframes igniteEmitter {
+    to { transform: scaleX(1); }
+}
+
 /* =========================================
-   5. ABOUT SECTION
+   7. ABOUT SECTION
 ========================================= */
 .about-section {
     padding: 5rem 5%;
@@ -312,7 +448,7 @@ h1::after {
 }
 
 /* =========================================
-   6. CONTACT SECTION
+   8. CONTACT SECTION & FORM
 ========================================= */
 .contact-section {
     padding: 8rem 5%;
@@ -327,33 +463,41 @@ h1::after {
     font-size: 1.1rem;
 }
 
-.contact-info {
-    margin-bottom: 3rem;
-    color: var(--text-main);
+.contact-form {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1.2rem;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
 }
 
-.contact-info a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.contact-info a:hover {
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: var(--card-bg);
+    border: 1px solid #334155;
+    border-radius: 6px;
     color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
 }
 
-@media (max-width: 768px) {
-    .contact-info {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--accent);
+}
+
+.contact-form button {
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
 }
 
 /* =========================================
-   7. FOOTER
+   9. FOOTER
 ========================================= */
 footer {
     text-align: center;
@@ -364,7 +508,7 @@ footer {
 }
 
 /* =========================================
-   8. POPUP MODAL
+   10. POPUP MODAL & WEB WIDGET
 ========================================= */
 .modal {
     border: none;
@@ -397,7 +541,6 @@ footer {
     border: none;
     color: var(--text-main);
     font-size: 2rem;
-    cursor: pointer;
     transition: color 0.3s;
 }
 
@@ -415,19 +558,15 @@ footer {
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
 }
 
-/* --- UPDATED: The Container --- */
 .extra-media {
     display: flex;
     flex-direction: column;
     gap: 1.5rem; 
     margin-top: 2rem;
-    
-    /* NEW: Adds a clean dividing line between the intro and the deep dive */
     padding-top: 2rem;
     border-top: 1px solid #334155;
 }
 
-/* NEW: Deep Dive Text Styling */
 .extra-media h4 {
     color: var(--accent);
     font-size: 1.25rem;
@@ -440,7 +579,6 @@ footer {
     font-size: 1.05rem;
 }
 
-/* Existing Media Styling */
 .extra-media img, 
 .extra-media video, 
 .extra-media iframe {
@@ -449,19 +587,158 @@ footer {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
+.web-game-container {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #334155;
+}
+
+.web-game-container iframe {
+    border-radius: 8px;
+    background: #000;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
 /* =========================================
-   9. KEYFRAME ANIMATIONS
+   11. LIGHTBOX MODAL
+========================================= */
+.lightbox {
+    border: none;
+    background: transparent;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    padding: 0;
+}
+
+.lightbox[open] {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+#lightbox-container {
+    position: relative;
+    display: inline-block; 
+}
+
+#lightbox-image {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: block; 
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+}
+
+#magnifier {
+    position: absolute;
+    width: 300px; 
+    height: 300px;
+    border: 2px solid var(--accent); 
+    border-radius: 50%; 
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%); 
+    pointer-events: none; 
+    display: none; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+#modal-image, 
+.extra-media img {
+    transition: transform 0.2s ease-out;
+}
+
+#modal-image:hover, 
+.extra-media img:hover {
+    transform: scale(1.02);
+}
+
+/* =========================================
+   12. CUSTOM CURSOR
+========================================= */
+#custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    pointer-events: none; 
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px var(--accent);
+}
+
+#custom-cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#custom-cursor-outline.hover-active {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(56, 189, 248, 0.1); 
+    border-color: transparent; 
+}
+
+#custom-cursor-dot, 
+#custom-cursor-outline {
+    margin: 0;
+    padding: 0;
+    inset: auto; 
+}
+
+#custom-cursor-dot { border: none; }
+#custom-cursor-outline { background-color: transparent; }
+
+/* =========================================
+   13. SCROLL REVEAL ANIMATIONS
+========================================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px); 
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0); 
+}
+
+.reveal-stagger {
+    transition-delay: 0.2s;
+}
+
+/* =========================================
+   14. KEYFRAME ANIMATIONS
 ========================================= */
 @keyframes drawLine {
-    to {
-        transform: scaleX(1);
-    }
+    to { transform: scaleX(1); }
 }
 
 @keyframes slideUpCard {
     from {
         opacity: 0;
-        top: 40px; /* Using 'top' instead of 'transform' so we don't break your hover effects! */
+        top: 40px; 
     }
     to {
         opacity: 1;
@@ -481,84 +758,14 @@ footer {
 }
 
 /* =========================================
-   10. LIGHTBOX MODAL
+   15. EASTER EGG: RETRO MODE
 ========================================= */
-.lightbox {
-    border: none;
-    background: transparent;
-    max-width: 100vw;
-    max-height: 100vh;
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    padding: 0;
-}
-
-/* This safely centers the image container inside the modal */
-.lightbox[open] {
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-}
-
-.lightbox::backdrop {
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(5px);
-}
-
-/* NEW: Shrink-wraps perfectly around the image, locking the mouse events to the picture */
-#lightbox-container {
-    position: relative;
-    display: inline-block; 
-    cursor: none; /* Hides the default cursor over the image */
-}
-
-/* Returns this to standard image styling */
-#lightbox-image {
-    max-width: 90vw;
-    max-height: 90vh;
-    display: block; /* Prevents weird bottom-spacing bugs */
-    border-radius: 4px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-}
-
-/* The Magnifying Glass */
-#magnifier {
-    position: absolute;
-    width: 300px; 
-    height: 300px;
-    border: 2px solid var(--accent); 
-    border-radius: 50%; 
-    background-repeat: no-repeat;
-    transform: translate(-50%, -50%); 
-    pointer-events: none; 
-    display: none; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.5);
-    z-index: 100;
-}
-
-/* Existing hover effects for the smaller images */
-#modal-image, 
-.extra-media img {
-    cursor: zoom-in;
-    transition: transform 0.2s ease-out;
-}
-
-#modal-image:hover, 
-.extra-media img:hover {
-    transform: scale(1.02);
-}
-
-/* =========================================
-   11. EASTER EGG: RETRO MODE
-========================================= */
-/* This class overrides your root variables and fonts when active */
 body.retro-mode {
     --bg-color: #000000;
-    --text-main: #39ff14; /* Hacker Neon Green */
-    --text-muted: #008000; /* Darker Green */
-    --accent: #ff00ff; /* Arcade Magenta */
-    --accent-alt: #00ffff; /* Arcade Cyan */
+    --text-main: #39ff14; 
+    --text-muted: #008000; 
+    --accent: #ff00ff; 
+    --accent-alt: #00ffff; 
     --card-bg: #111111;
 }
 
@@ -569,10 +776,9 @@ body.retro-mode * {
 body.retro-mode h1, 
 body.retro-mode .greeting, 
 body.retro-mode .subtitle {
-    text-shadow: 3px 3px 0px var(--accent-alt); /* Adds a retro drop-shadow */
+    text-shadow: 3px 3px 0px var(--accent-alt); 
 }
 
-/* Adds a subtle CRT TV flicker overlay to the entire screen */
 body.retro-mode::after {
     content: "";
     position: fixed;
@@ -581,8 +787,8 @@ body.retro-mode::after {
     width: 100vw;
     height: 100vh;
     background: rgba(18, 16, 16, 0.1);
-    z-index: 999; /* Sits on top of everything */
-    pointer-events: none; /* Lets you still click things through the overlay */
+    z-index: 999; 
+    pointer-events: none; 
     animation: flicker 0.15s infinite;
 }
 
@@ -590,154 +796,4 @@ body.retro-mode::after {
     0% { opacity: 0.05; }
     50% { opacity: 0.15; }
     100% { opacity: 0.02; }
-}
-
-/* =========================================
-   12. SCROLL REVEAL ANIMATIONS
-========================================= */
-/* The hidden starting state */
-.reveal {
-    opacity: 0;
-    transform: translateY(60px); /* Pushed down slightly */
-    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* The active state (Triggered by JavaScript) */
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0); /* Floats back to its natural position */
-}
-
-/* Optional: Staggering the skills list so they pop in one by one */
-.reveal-stagger {
-    transition-delay: 0.2s;
-}
-
-/* =========================================
-   13. CUSTOM CURSOR
-========================================= */
-/* Hide the default Windows/Mac mouse pointer everywhere */
-body {
-    cursor: none;
-}
-
-/* Ensure clickable things don't override our custom cursor */
-a, button, .project-card, .extra-media img {
-    cursor: none !important;
-}
-
-/* The solid inner dot */
-#custom-cursor-dot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 6px;
-    background-color: var(--accent);
-    border-radius: 50%;
-    pointer-events: none; /* Crucial: lets your clicks pass through it */
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 8px var(--accent);
-}
-
-/* The trailing outline */
-#custom-cursor-outline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 30px;
-    height: 30px;
-    border: 1px solid var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-}
-
-/* The state that triggers when you hover over a button or project */
-#custom-cursor-outline.hover-active {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(56, 189, 248, 0.1); /* Slight blue tint */
-    border-color: transparent; /* Hides the ring to make it a soft bubble */
-}
-
-#custom-cursor-dot, 
-#custom-cursor-outline {
-    margin: 0;
-    padding: 0;
-    inset: auto; /* Stops the browser from centering the popover */
-}
-
-/* =========================================
-   14. PARTICLE WRAPPER
-========================================= */
-.particle-wrapper {
-    position: relative;
-    overflow: hidden; /* This keeps the particles from bleeding into the About section */
-}
-
-/* =========================================
-   15. PARTICLE EMITTER BAR
-========================================= */
-.emitter-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px; /* A thin, intense core */
-    
-    /* Fades out at the extreme left and right edges for a sleek look */
-    background: linear-gradient(90deg, transparent, var(--accent), var(--text-main), var(--accent), transparent);
-    
-    /* Layers of glow to create a hot bloom effect */
-    box-shadow: 0 -4px 15px rgba(56, 189, 248, 0.6), 0 -10px 30px rgba(56, 189, 248, 0.2);
-    
-    z-index: 2; /* Ensures it sits above the canvas but behind the cards */
-    
-    /* The Growing Animation */
-    transform: scaleX(0); /* Starts completely invisible */
-    transform-origin: center; /* Expands outwards from the middle */
-    animation: igniteEmitter 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: 0.3s; /* Waits just a moment after the page loads */
-}
-
-@keyframes igniteEmitter {
-    to {
-        transform: scaleX(1);
-    }
-}
-
-/* =========================================
-   16. CUSTOM SCROLLBAR
-========================================= */
-/* Firefox Support */
-html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent) var(--bg-color);
-}
-
-/* Chrome, Edge, and Safari Support */
-::-webkit-scrollbar {
-    width: 12px; /* Width of the vertical scrollbar */
-}
-
-/* The track (the dark path the slider moves along) */
-::-webkit-scrollbar-track {
-    background: var(--bg-color); 
-    border-left: 1px solid rgba(56, 189, 248, 0.1); /* Adds a very subtle neon edge to the track */
-}
-
-/* The thumb (the actual slider handle) */
-::-webkit-scrollbar-thumb {
-    background-color: var(--accent); 
-    border-radius: 10px; /* Gives it a sleek, pill-like shape */
-    border: 3px solid var(--bg-color); /* Creates a padded border so it doesn't touch the edges */
-}
-
-/* The hover state when grabbing the scrollbar */
-::-webkit-scrollbar-thumb:hover {
-    background-color: var(--accent-alt); /* Shifts color to let the user know it is interactive */
 }
