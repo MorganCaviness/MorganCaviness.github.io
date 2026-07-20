@@ -1,15 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-       name="viewport"
-       content="width=device-width, initial-scale=1.0" />
-    <title>Morgan Caviness</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <h1>Morgan Caviness</h1>
-    <p>Welcome!</p>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morgan Caviness | Portfolio</title>
+    <!-- This links our HTML to the CSS file we just made -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+<!-- UPDATED: Added the popover attributes -->
+    <div id="custom-cursor-dot" popover="manual"></div>
+    <div id="custom-cursor-outline" popover="manual"></div>
+        
+    <nav class="navbar">
+        <div class="logo">MC.</div>
+        <ul class="nav-links">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="particle-wrapper">
+
+        <canvas id="particle-canvas"></canvas>
+
+        <header class="hero">
+
+                <p class="greeting">Hello, I am</p>
+                <h1><span class="gradient-text">Morgan Caviness.</span></h1>
+                <h2 class="subtitle">Game Developer & Graphic Designer.</h2>
+                <p class="hero-description">
+                    Specializing in creating engaging digital experiences, combining technical logic with strong visual design.
+                </p>
+            </header>
+
+            <section id="work" class="portfolio-section">
+
+                <h2 class="section-title">Featured Works</h2>
+                
+                <div class="project-grid">
+
+                <!-- Project 1: Cully Bubble -->
+            <article class="project-card">
+                <img src="images/BubblesFeatureGraphic.png" alt="Screenshot of Cully Bubble" class="project-image">
+                <div class="project-info">
+                    <h3>Cully Bubble</h3>
+                    <p class="tech-stack">Unreal Engine 5 • Google Play • Gaming</p>
+                    <p>My relaxing ASMR bubble popping mobile game, featuring a diverse selection of beautiful, immersive worlds.</p>
+                </div>
+                
+                <!-- NEW: The Deep Dive Content -->
+                <div class="hidden-media" style="display: none;">
+                    
+                    <iframe src="https://player.vimeo.com/video/1211407632?badge=0&byline=0&portrait=0&color=38bdf8" width="560" height="315" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    <h4>The Development Process</h4>
+                    <p>Building Cully Bubble allowed me to heavily utilize Unreal Engine 5's visual scripting. I built the core gameplay loop entirely in Blueprints, focusing heavily on responsive touch controls and satisfying physics.</p>
+                    
+                    <!-- You can drop in a process image here -->
+                    <img src="images/Blueprints.png" alt="Blueprint Logic">
+                    
+                    <h4>Visual Polish & VFX</h4>
+                    <p>To achieve the relaxing ASMR aesthetic, I relied on Niagara particle systems. By fine-tuning the particle forces and lifetime logic, I was able to create bubbles that feel tactile and rewarding to pop.</p>
+                    
+                    <!-- Another image or even a gameplay video -->
+                    <img src="images/CullyBubble_Level1.png" alt="Level Design">
+                    
+                </div>
+            </article>
+
+            <article class="project-card">
+                <img src="images/HanselAndGretelRender.png" alt="Hansel and Gretel book cover design" class="project-image">
+                <div class="project-info">
+                    <h3>Hansel and Gretel Book Cover</h3>
+                    <p class="tech-stack">Photoshop • Illustrator • Graphic Design</p>
+                    <p>A reimagined book cover design for the classic fairy tale.</p>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <img src="images/DigitalBazooka.png" alt="Digital Bazooka Logo" class="project-image align-top">
+                <div class="project-info">
+                    <h3>Digital Bazooka Intro</h3>
+                    <p class="tech-stack">DaVinci Resolve • Video Editing • Graphic Design</p>
+                    <p>An intro video for the Digital Bazooka podcast.</p>
+                </div>
+
+                <!-- Hidden media that only shows in the modal -->
+                <div class="hidden-media" style="display: none;">
+                    <iframe src="https://player.vimeo.com/video/1211404852?byline=0&portrait=0&color=38bdf8" width="560" height="315" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <img src="images/PittyLogo.png" alt="Pitty Logo" class="project-image">
+                <div class="project-info">
+                    <h3>Pitty Official Channel Logo</h3>
+                    <p class="tech-stack">Affinity • Branding • Logo • Graphic Design</p>
+                    <p>A logo for the PittyOfficial Twitch channel.</p>
+                </div>
+            </article>
+        </div>
+        <!-- NEW: The Glowing Emitter Bar -->
+        <div class="emitter-bar"></div>
+    </div>
+    </section>
+    
+    <section id="about" class="about-section">
+        <h2 class="section-title">About Me</h2>
+        
+        <div class="about-content reveal">
+            <div class="about-text">
+                <p>I am a game developer and graphic designer with a passion for bringing ideas to life, both on screen and in the real world. While I spend much of my time building immersive experiences in Unreal Engine 5 or designing clean branding and assets in Affinity and Adobe, my love for creating extends far beyond the digital space.</p>
+                
+                <p>I genuinely enjoy carpentry, building, and fixing physical items. Understanding how structures are built from the ground up constantly informs my digital design logic. To continue expanding my hands-on skill set, I am heading to Amarillo College this August to begin an advanced certificate in welding.</p>
+                
+                <p>Whether I am visual scripting a complex game mechanic, laying out typography, or fabricating with raw materials, I am driven by the process of problem-solving and high-quality creation.</p>
+            </div>
+            
+            <div class="about-skills">
+                <h3>Core Skills</h3>
+                <ul class="skills-list">
+                    <li>Unreal Engine 5 (Blueprints & Niagara)</li>
+                    <li>Affinity Suite & Photoshop</li>
+                    <li>Graphic Design & Typography</li>
+                    <li>Video Editing (DaVinci Resolve)</li>
+                    <li>Carpentry & Physical Fabrication</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section reveal">
+        <h2 class="section-title">Get In Touch</h2>
+        
+        <div class="contact-content">
+            <p>I am currently open to new opportunities and freelance projects. Whether you have a question about my work, need a custom design, or just want to say hi, my inbox is always open!</p>
+            
+            <div class="contact-info">
+                <p><strong>Email:</strong> <a href="mailto:Me@MorganCaviness.com">Me@MorganCaviness.com</a></p>
+                <p><strong>Location:</strong> Amarillo, TX</p>
+            </div>
+
+            <a href="mailto:Me@MorganCaviness.com" class="btn">Contact Me</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Morgan Caviness</p>
+    </footer>
+
+    <!-- The Hidden Popup Modal -->
+    <dialog id="project-modal" class="modal">
+        <div class="modal-content">
+            <button id="close-modal" class="close-btn">&times;</button>
+            <img id="modal-image" src="" alt="Project Image">
+            <h3 id="modal-title">Project Title</h3>
+            <p id="modal-tech" class="tech-stack">Tech Stack</p>
+            <p id="modal-desc">Project description goes here.</p>
+            
+            <!-- This empty div catches the extra photos/videos -->
+            <div id="modal-extra-media" class="extra-media"></div>
+        </div>
+    </dialog>
+
+    <dialog id="lightbox-modal" class="lightbox">
+        <div id="lightbox-container">
+            <img id="lightbox-image" src="" alt="Zoomed Project Image">
+            <div id="magnifier"></div>
+        </div>
+    </dialog>
+
+    <!-- Links our JavaScript file -->
+    <script src="script.js"></script>
+
+    <!-- Links our JavaScript file -->
+    <script src="script.js"></script>
+</body>
 </html>
