@@ -426,3 +426,38 @@ if (contactForm) {
         }
     });
 }
+
+// =========================================
+//   10. SCROLL SPY NAVIGATION
+// =========================================
+// Grab all sections that have an ID, and all the links in the navbar
+const scrollSections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+const spyOptions = {
+    // Triggers when at least 30% of the section is visible on screen
+    threshold: 0.3, 
+    // Offsets the trigger point slightly below the sticky navbar
+    rootMargin: "-100px 0px -30% 0px" 
+};
+
+const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // 1. Remove the active class from every link
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // 2. Find the ID of the section currently on screen
+            const activeId = entry.target.getAttribute('id');
+            
+            // 3. Find the matching link in the navbar and turn it on
+            const activeLink = document.querySelector(`.nav-links a[href="#${activeId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    });
+}, spyOptions);
+
+// Tell the observer to watch every section
+scrollSections.forEach(section => spyObserver.observe(section));

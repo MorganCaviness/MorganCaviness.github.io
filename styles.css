@@ -70,8 +70,17 @@ html {
 .navbar {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 5%;
+    padding: 1.2rem 5%; /* Slightly reduced padding so it takes up less screen space */
     align-items: center;
+    
+    /* NEW: Sticky Glass Effect */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.85); /* Matches your dark theme */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* Safari support */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle edge to separate it from content */
 }
 
 .logo {
@@ -91,10 +100,30 @@ html {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
+    position: relative; /* Needed for the active dot indicator */
 }
 
 .nav-links a:hover {
     color: var(--accent);
+}
+
+/* NEW: The Active State (Triggered by Scroll Spy) */
+.nav-links a.active {
+    color: var(--accent);
+}
+
+/* NEW: A sleek glowing dot underneath the currently active section */
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
 }
 
 /* =========================================
