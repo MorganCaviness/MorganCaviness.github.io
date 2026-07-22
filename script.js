@@ -552,3 +552,29 @@ const spyObserver = new IntersectionObserver((entries) => {
 
 // Tell the observer to watch every section
 scrollSections.forEach(section => spyObserver.observe(section));
+
+// --- NEW: INLINE MODAL CAPTIONS ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Find all images that have the 'show-caption' class
+    const inlineImages = document.querySelectorAll('.hidden-media img.show-caption');
+
+    inlineImages.forEach(img => {
+        const subtitleText = img.getAttribute('data-subtitle');
+        
+        if (subtitleText) {
+            // Create a wrapper container
+            const figure = document.createElement('figure');
+            figure.className = 'inline-figure';
+
+            // Create the text element
+            const caption = document.createElement('figcaption');
+            caption.className = 'inline-caption';
+            caption.textContent = subtitleText;
+
+            // Insert the figure into the DOM and move the image inside it
+            img.parentNode.insertBefore(figure, img);
+            figure.appendChild(img);
+            figure.appendChild(caption);
+        }
+    });
+});
