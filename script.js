@@ -13,7 +13,6 @@ const modal = document.getElementById('project-modal');
 const closeModalBtn = document.getElementById('close-modal');
 const projectCards = document.querySelectorAll('.project-card');
 
-const modalImg = document.getElementById('modal-image');
 const modalTitle = document.getElementById('modal-title');
 const modalTech = document.getElementById('modal-tech');
 const modalDesc = document.getElementById('modal-desc');
@@ -22,6 +21,13 @@ const modalExtraMedia = document.getElementById('modal-extra-media');
 const cursorDot = document.getElementById('custom-cursor-dot');
 const cursorOutline = document.getElementById('custom-cursor-outline');
 let mouse = { x: null, y: null };
+
+const lightboxSubtitle = document.getElementById('lightbox-subtitle');
+const lightboxPrevBtn = document.getElementById('lightbox-prev');
+const lightboxNextBtn = document.getElementById('lightbox-next');
+
+let currentGallery = []; // Holds all images for the currently open project
+let currentImageIndex = 0; // Tracks which image is currently showing in the lightbox
 
 // =========================================
 //   2. CUSTOM CURSOR & TOP LAYER LOGIC
@@ -52,12 +58,13 @@ interactables.forEach(el => {
     el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover-active'));
 });
 
-if (lightboxContainer) {
-    lightboxContainer.addEventListener('mouseenter', () => {
+// UPDATED: Only hide the custom cursor when hovering directly over the image
+if (lightboxImage) {
+    lightboxImage.addEventListener('mouseenter', () => {
         cursorDot.style.opacity = '0';
         cursorOutline.style.opacity = '0';
     });
-    lightboxContainer.addEventListener('mouseleave', () => {
+    lightboxImage.addEventListener('mouseleave', () => {
         cursorDot.style.opacity = '1';
         cursorOutline.style.opacity = '1';
     });
@@ -170,17 +177,18 @@ animateParticles();
 //   4. PROJECT MODALS & 3D TILT
 // =========================================
 projectCards.forEach(card => {
+
     card.addEventListener('click', () => {
-        const imgSrc = card.querySelector('.project-image').src;
         const titleText = card.querySelector('h3').innerText;
         const techText = card.querySelector('.tech-stack').innerText;
         const descText = card.querySelector('p:not(.tech-stack)').innerText;
         const hiddenMedia = card.querySelector('.hidden-media');
 
-        modalImg.src = imgSrc;
+        // 1. Set main modal text content
         modalTitle.innerText = titleText;
         modalDesc.innerText = descText;
 
+        // 2. Build Tech Stack Tags
         modalTech.innerHTML = '';
         const tags = techText.split('•').map(t => t.trim());
         tags.forEach(tag => {
@@ -188,18 +196,29 @@ projectCards.forEach(card => {
             tagLink.href = "#";
             tagLink.className = 'tech-tag';
             tagLink.innerText = tag;
-            
             tagLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 clearAndCloseModal(); 
                 filterProjectsByTag(tag); 
             });
-            
             modalTech.appendChild(tagLink);
         });
 
+        // 3. Reset Gallery & Inject Hidden Media
+        currentGallery = [];
+
         if (hiddenMedia) {
             modalExtraMedia.innerHTML = hiddenMedia.innerHTML;
+            
+            // Collect all images from hidden-media into the lightbox gallery array
+            const extraImgs = modalExtraMedia.querySelectorAll('img');
+            extraImgs.forEach(img => {
+                currentGallery.push({
+                    src: img.src,
+                    subtitle: img.getAttribute('data-subtitle') || ""
+                });
+            });
+
             const injectedVideos = modalExtraMedia.querySelectorAll('video');
             injectedVideos.forEach(vid => vid.load());
 
@@ -218,11 +237,14 @@ projectCards.forEach(card => {
             modalExtraMedia.innerHTML = '';
         }
 
-        const clickableImages = modal.querySelectorAll('img');
+        // 4. Attach Lightbox Click Listener to any images inside the modal
+        const clickableImages = modalExtraMedia.querySelectorAll('img');
         clickableImages.forEach(img => {
             img.addEventListener('click', () => {
-                lightboxImage.src = img.src; 
-                magnifier.style.backgroundImage = `url(${img.src})`; 
+                const index = currentGallery.findIndex(item => item.src === img.src);
+                currentImageIndex = index !== -1 ? index : 0;
+                
+                updateLightboxView();
                 lightboxModal.showModal(); 
                 bringCursorToFront(); 
             });
@@ -246,6 +268,7 @@ projectCards.forEach(card => {
     card.addEventListener('mouseleave', () => {
         card.style.transform = `perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)`;
     });
+
 });
 
 function clearAndCloseModal() {
@@ -255,24 +278,92 @@ function clearAndCloseModal() {
 
 closeModalBtn.addEventListener('click', clearAndCloseModal);
 
+// Close modal when clicking the dark backdrop outside modal-content
 modal.addEventListener('click', (event) => {
-    const dialogDimensions = modal.getBoundingClientRect();
-    if (
-        event.clientX < dialogDimensions.left ||
-        event.clientX > dialogDimensions.right ||
-        event.clientY < dialogDimensions.top ||
-        event.clientY > dialogDimensions.bottom
-    ) {
+    if (event.target === modal) {
         clearAndCloseModal();
     }
 });
 
 // =========================================
-//   5. LIGHTBOX & MAGNIFIER
+//   5. LIGHTBOX & MAGNIFIER NAVIGATION
 // =========================================
-lightboxContainer.addEventListener('mousemove', (event) => {
-    magnifier.style.display = 'block';
+function updateLightboxView() {
+    const currentData = currentGallery[currentImageIndex];
+    lightboxImage.src = currentData.src;
+    
+    // Wait for the browser to draw the image so we get accurate width dimensions
+    lightboxImage.decode().then(() => {
+        
+        if (currentData.subtitle) {
+            lightboxSubtitle.innerText = currentData.subtitle;
+            
+            // Pass the image URL to the subtitle box so the CSS reflection can inherit it
+            lightboxSubtitle.style.backgroundImage = `url(${currentData.src})`;
+            
+            // Snap the text box width perfectly to the image width
+            lightboxSubtitle.style.width = `${lightboxImage.clientWidth}px`;
+            
+            lightboxSubtitle.style.display = 'block';
+        } else {
+            lightboxSubtitle.style.display = 'none';
+        }
+        
+        // Update Magnifier Background
+        magnifier.style.backgroundImage = `url(${currentData.src})`;
+        
+    }).catch(err => console.error("Image load error:", err));
 
+    // Hide navigation arrows if there is only 1 image in the gallery
+    if (currentGallery.length <= 1) {
+        lightboxPrevBtn.style.display = 'none';
+        lightboxNextBtn.style.display = 'none';
+    } else {
+        lightboxPrevBtn.style.display = 'flex';
+        lightboxNextBtn.style.display = 'flex';
+    }
+}
+
+function nextLightboxImage() {
+    currentImageIndex++;
+    if (currentImageIndex >= currentGallery.length) {
+        currentImageIndex = 0; // Wrap to beginning
+    }
+    updateLightboxView();
+}
+
+function prevLightboxImage() {
+    currentImageIndex--;
+    if (currentImageIndex < 0) {
+        currentImageIndex = currentGallery.length - 1; // Wrap to end
+    }
+    updateLightboxView();
+}
+
+// Button Click Listeners
+lightboxNextBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevents the click from closing the modal
+    nextLightboxImage();
+});
+
+lightboxPrevBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    prevLightboxImage();
+});
+
+// Keyboard Listeners
+document.addEventListener('keydown', (e) => {
+    if (lightboxModal.open) {
+        if (e.key === 'ArrowRight') nextLightboxImage();
+        if (e.key === 'ArrowLeft') prevLightboxImage();
+    }
+});
+
+// Magnifier Logic
+// Magnifier Logic
+// UPDATED: Now strictly listens to the image, ignoring the buttons
+lightboxImage.addEventListener('mousemove', (event) => {
+    magnifier.style.display = 'block';
     const rect = lightboxImage.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
@@ -284,15 +375,15 @@ lightboxContainer.addEventListener('mousemove', (event) => {
     const yPercent = (y / rect.height) * 100;
 
     magnifier.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
-    
     const zoomLevel = 1.8;
     magnifier.style.backgroundSize = `${rect.width * zoomLevel}px ${rect.height * zoomLevel}px`;
 });
 
-lightboxContainer.addEventListener('mouseleave', () => {
+lightboxImage.addEventListener('mouseleave', () => {
     magnifier.style.display = 'none';
 });
 
+// Close lightbox when clicking the background
 lightboxModal.addEventListener('click', (event) => {
     if (event.target === lightboxModal) {
         lightboxModal.close();
