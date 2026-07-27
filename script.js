@@ -578,3 +578,92 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// --- DYNAMIC CAROUSEL INITIALIZER ---
+function initCarousels() {
+  const carousels = document.querySelectorAll('.carousel');
+
+  carousels.forEach((carousel) => {
+    // Avoid double-initializing if already built
+    if (carousel.dataset.initialized) return;
+
+    // Grab all direct <img> elements inside the carousel
+    const images = Array.from(carousel.querySelectorAll(':scope > img'));
+    if (images.length === 0) return;
+
+    // If there's only 1 image, don't build carousel controls
+    if (images.length === 1) {
+      images[0].classList.add('carousel-slide');
+      carousel.dataset.initialized = 'true';
+      return;
+    }
+
+    // 1. Create the slider track and move existing images into it
+    const track = document.createElement('div');
+    track.classList.add('carousel-track');
+    images.forEach((img) => {
+      img.classList.add('carousel-slide');
+      track.appendChild(img);
+    });
+
+    // 2. Create the Prev & Next buttons
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'carousel-btn prev';
+    prevBtn.setAttribute('aria-label', 'Previous image');
+    prevBtn.innerHTML = '‹';
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'carousel-btn next';
+    nextBtn.setAttribute('aria-label', 'Next image');
+    nextBtn.innerHTML = '›';
+
+    // 3. Create the dots container
+    const dotsContainer = document.createElement('div');
+    dotsContainer.className = 'carousel-dots';
+
+    // 4. Inject everything into the parent carousel element
+    carousel.appendChild(track);
+    carousel.appendChild(prevBtn);
+    carousel.appendChild(nextBtn);
+    carousel.appendChild(dotsContainer);
+
+    // 5. Build dots & sliding logic
+    let currentIndex = 0;
+
+    images.forEach((_, index) => {
+      const dot = document.createElement('span');
+      dot.classList.add('carousel-dot');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(index);
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+    function goToSlide(index) {
+      currentIndex = (index + images.length) % images.length;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+    }
+
+    // Button Listeners
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSlide(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSlide(currentIndex + 1);
+    });
+
+    // Mark as initialized
+    carousel.dataset.initialized = 'true';
+  });
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', initCarousels);
