@@ -15,7 +15,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: system-ui, -apple-system, sans-serif;
+    /* Replace the old system-ui font with your new Google Font */
+    font-family: 'Jua', sans-serif; 
     scrollbar-width: thin;
     scrollbar-color: var(--accent) var(--bg-color);
 }
@@ -142,19 +143,53 @@ input, textarea {
     border: none;
 }
 
+/* Disable custom cursor entirely on Mobile & Touch Devices */
+@media (pointer: coarse) {
+    #custom-cursor-dot, 
+    #custom-cursor-outline {
+        display: none !important;
+    }
+    * {
+        cursor: auto !important; /* Restores the native mobile touch behaviors */
+    }
+}
+
+/* =========================================
+   3. NAVIGATION
+========================================= */
 /* =========================================
    3. NAVIGATION
 ========================================= */
 .navbar {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 5%;
-    position: sticky; top: 0; z-index: 1000;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    
+    /* Layout & Sizing */
+    width: 90%;
+    max-width: 900px;
+    margin: 1.5rem auto; /* Centers the pill and gives it breathing room */
+    padding: 0.6rem 2rem; /* Adjusted padding for a sleeker profile */
+    
+    /* Sticky Positioning */
+    position: sticky; 
+    top: 1.5rem; /* Sticks slightly below the top edge of the screen */
+    z-index: 1000;
+    
+    /* Aesthetics (The Pill Look) */
     background: rgba(15, 23, 42, 0.85); 
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Wraps the border completely around */
+    border-radius: 50px; /* Creates the perfect pill shape */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Makes it float */
 }
 
-.logo { font-size: 1.5rem; font-weight: bold; letter-spacing: -1px; }
+.logo {
+    /* Scaled down slightly from 64px so the pill doesn't get too thick */
+    max-width: 45px;
+    max-height: 45px;
+}
 
 .nav-links { list-style: none; display: flex; gap: 2rem; }
 .nav-links a {
@@ -189,10 +224,35 @@ input, textarea {
     border-radius: 50%; box-shadow: 0 0 8px var(--accent); animation: pulseGlow 1.5s infinite;
 }
 
-.greeting { color: var(--accent); font-weight: bold; margin-bottom: -1rem; }
+.greeting { color: var(--accent); font-weight: bold;}
+
+.name-lockup {
+    width: max-content; /* Shrink-wraps the container to the exact width of your h1 */
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
 h1 {
-    font-size: clamp(3rem, 5vw, 5rem); line-height: 1.2; padding-bottom: 0.2rem; 
-    margin-bottom: 0.5rem; position: relative; width: max-content; z-index: 1; 
+    font-size: clamp(3rem, 5vw, 5rem); 
+    line-height: 1.2; 
+    padding-bottom: 0.2rem; 
+    margin-bottom: 0.5rem; 
+    position: relative; 
+    /* Removed width: max-content and z-index: 1 (moved to the lockup container) */
+}
+
+.subtitle { 
+    /* Scaled down slightly to fit beautifully underneath */
+    font-size: clamp(1rem, 1.5vw, 1.35rem); 
+    color: var(--text-muted); 
+    margin-bottom: 1.5rem; 
+    
+    /* The Magic Trick: Forces the text to spread exactly to the edges */
+    width: 100%;
+    text-align-last: justify; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 h1::after {
@@ -203,8 +263,6 @@ h1::after {
     animation-delay: 0.6s; 
 }
 .gradient-text { background: linear-gradient(var(--text-main) 40%, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.subtitle { font-size: clamp(2rem, 3vw, 3rem); color: var(--text-muted); margin-bottom: 1.5rem; }
-.hero-description { color: var(--text-muted); font-size: 1.1rem; max-width: 500px; margin-bottom: 0; }
 
 .btn {
     display: inline-block; padding: 0.8rem 1.5rem; border: 1px solid var(--accent);
@@ -217,7 +275,16 @@ h1::after {
 ========================================= */
 .portfolio-section { padding: 2rem 5% 5rem 5%; position: relative; }
 .portfolio-section .section-title, .portfolio-section .project-grid { position: relative; z-index: 1; }
-.section-title { font-size: 2rem; margin-bottom: 3rem; }
+
+.section-title { 
+    font-size: 2rem; 
+    margin-bottom: 3rem; 
+    
+    /* Adds the same smooth fade-in used by your Hero text */
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.1s; /* Triggers right before the project cards load */
+}
 
 .filter-banner {
     display: none; align-items: center; justify-content: space-between;
@@ -237,20 +304,24 @@ h1::after {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
     backface-visibility: hidden; -webkit-backface-visibility: hidden; transform-style: preserve-3d;
 }
-.project-card:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); }
+
+/* DESKTOP HOVERS: Only apply if the user has a fine mouse pointer */
+@media (hover: hover) and (pointer: fine) {
+    .project-card:hover { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); }
+    .project-card:hover .project-image { transform: scale(1.05); }
+    .project-card:hover .project-info { opacity: 1; }
+}
 
 .project-image {
     width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; transition: transform 0.5s ease;
     image-rendering: high-quality; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: translateZ(0);
 }
 .project-image.align-top { object-position: top; }
-.project-card:hover .project-image { transform: scale(1.05); }
 
 .project-info {
     position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85);
     display: flex; flex-direction: column; justify-content: center; padding: 2rem; opacity: 0; transition: opacity 0.3s ease;
 }
-.project-card:hover .project-info { opacity: 1; }
 
 .tech-stack { font-size: 0.85rem; color: var(--accent); margin-bottom: 1rem; font-family: monospace; }
 .tech-tag {

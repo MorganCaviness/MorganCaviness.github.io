@@ -95,6 +95,18 @@ document.addEventListener('mouseout', (e) => {
 
 bringCursorToFront();
 
+// Hide cursor when leaving the browser window
+document.addEventListener('mouseleave', () => {
+    if (cursorDot) cursorDot.style.opacity = '0';
+    if (cursorOutline) cursorOutline.style.opacity = '0';
+});
+
+// Show cursor when re-entering the browser window
+document.addEventListener('mouseenter', () => {
+    if (cursorDot) cursorDot.style.opacity = '1';
+    if (cursorOutline) cursorOutline.style.opacity = '1';
+});
+
 // =========================================
 // 3. PARTICLE SYSTEM (BACKGROUND)
 // =========================================
@@ -618,3 +630,26 @@ contactForm?.addEventListener('submit', async (e) => {
         formStatus.innerText = "Network error. Please try again.";
     }
 });
+
+// =========================================
+// 11. MOBILE SCROLL TILT
+// =========================================
+if (window.matchMedia("(hover: none), (pointer: coarse)").matches) {
+    window.addEventListener('scroll', () => {
+        const screenCenter = window.innerHeight / 2;
+        
+        projectCards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            const cardCenter = rect.top + rect.height / 2;
+            const distance = cardCenter - screenCenter;
+            
+            // Apply a smooth 3D tilt to EVERY card on screen
+            // The further from the center, the more it tilts (capped at 15 degrees)
+            let rotateX = (distance / screenCenter) * 15;
+            rotateX = Math.max(-15, Math.min(15, rotateX)); 
+            
+            card.style.transform = `perspective(1000px) scale(1.03) rotateX(${rotateX}deg) rotateY(0deg)`;
+        });
+        
+    }, { passive: true });
+}
