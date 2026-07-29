@@ -42,29 +42,6 @@ function bringCursorToFront() {
     cursorOutline?.showPopover();
 }
 
-// =========================================
-// 2A. NOISE PARALLAX PHYSICS ENGINE
-// =========================================
-let noiseTargetX = 0;
-let noiseTargetY = 0;
-let noiseCurrentX = 0;
-let noiseCurrentY = 0;
-
-function renderNoiseParallax() {
-    // LOWER EASING VALUE = MORE MOMENTUM / SLIDE
-    // Lowered from 0.05 to 0.015 for a super silky, long momentum slide
-    const ease = 0.015;
-    
-    noiseCurrentX += (noiseTargetX - noiseCurrentX) * ease;
-    noiseCurrentY += (noiseTargetY - noiseCurrentY) * ease;
-    
-    document.body.style.setProperty('--noise-x', `${noiseCurrentX.toFixed(2)}px`);
-    document.body.style.setProperty('--noise-y', `${noiseCurrentY.toFixed(2)}px`);
-    
-    requestAnimationFrame(renderNoiseParallax);
-}
-renderNoiseParallax();
-
 window.addEventListener('mousemove', (event) => {
     // 1. Viewport coordinates for the Custom Cursor
     mouse.x = event.clientX;
@@ -88,14 +65,6 @@ window.addEventListener('mousemove', (event) => {
             top: `${mouse.y}px`
         }, { duration: 100, fill: "forwards" });
     }
-
-    // 4. Update the Parallax Target
-    const xOffset = (event.clientX / window.innerWidth - 0.5) * 2;
-    const yOffset = (event.clientY / window.innerHeight - 0.5) * 2;
-
-    // We set the target here, but the renderNoiseParallax() loop handles the actual slide!
-    noiseTargetX = xOffset * -30;
-    noiseTargetY = yOffset * -30;
 });
 
 // Dynamic Hover states for all interactive elements and text fields
@@ -287,7 +256,8 @@ function initCarousels(container) {
 
         function goToSlide(index) {
             currentIndex = (index + images.length) % images.length;
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            // NEW: translate3d forces the GPU to render the slide smoothly
+            track.style.transform = `translate3d(-${currentIndex * 100}%, 0, 0)`;
             dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
         }
 
@@ -396,43 +366,112 @@ modal.addEventListener('click', (e) => { if (e.target === modal) clearAndCloseMo
 // =========================================
 // 6. LIGHTBOX & MAGNIFIER
 // =========================================
-function updateLightboxView() {
+// 1. Pass the direction into the update function so it knows which way to slide
+function nextLightboxImage() { 
+    currentImageIndex = (currentImageIndex + 1) % currentGallery.length; 
+    updateLightboxView('next'); 
+}
+function prevLightboxImage() { 
+    currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length; 
+    updateLightboxView('prev'); 
+}
+
+// 2. The upgraded Infinite-Slide Engine
+function updateLightboxView(direction = 'none') {
     const currentData = currentGallery[currentImageIndex];
+    const wrapper = document.querySelector('.lightbox-image-wrapper');
     
-    // 1. FIX: Instantly hide the old subtitle to prevent the ghosting lag
-    lightboxSubtitle.style.display = 'none';
+    // Instantly hide subtitle and wipe old clones (prevents spam-click buildup)
+    lightboxSubtitle.style.transition = 'none';
+    lightboxSubtitle.style.opacity = '0';
+    document.querySelectorAll('.lightbox-clone').forEach(el => el.remove());
+
+    let clone = null;
+
+    // A. Clone the current image BEFORE changing it (only if we are actively sliding)
+    if (direction !== 'none' && lightboxImage.src) {
+        clone = lightboxImage.cloneNode(true);
+        clone.id = ''; // Remove ID so we don't have duplicates
+        clone.classList.add('lightbox-clone');
+        
+        // Lock the clone exactly where the old image was sitting
+        clone.style.position = 'absolute';
+        clone.style.width = `${lightboxImage.clientWidth}px`;
+        clone.style.height = `${lightboxImage.clientHeight}px`;
+        clone.style.margin = '0';
+        clone.style.objectFit = 'contain';
+        clone.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease';
+        
+        wrapper.appendChild(clone);
+    }
+
+    // B. Park the REAL image completely off-screen so it is ready to slide in
+    lightboxImage.style.transition = 'none';
+    lightboxImage.style.opacity = '0';
     
-    // Update the main image source
+    if (direction === 'next') {
+        lightboxImage.style.transform = 'translate3d(100vw, 0, 0)';
+    } else if (direction === 'prev') {
+        lightboxImage.style.transform = 'translate3d(-100vw, 0, 0)';
+    } else {
+        lightboxImage.style.transform = 'translate3d(0, 0, 0)'; // Initial open
+    }
+
+    // C. Swap the source and wait for it to decode in the background
     lightboxImage.src = currentData.src;
-    
-    // Wait for the new image to render before applying its specific subtitle
+
     lightboxImage.decode().then(() => {
+        // Force the browser to acknowledge the off-screen start position
+        void lightboxImage.offsetWidth;
+
+        // D. Fire the animation! Slide the new image IN.
+        lightboxImage.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease';
+        lightboxImage.style.opacity = '1';
+        lightboxImage.style.transform = 'translate3d(0, 0, 0)';
+
+        // E. Slide the old clone OUT.
+        if (clone) {
+            if (direction === 'next') {
+                clone.style.transform = 'translate3d(-100vw, 0, 0)';
+            } else if (direction === 'prev') {
+                clone.style.transform = 'translate3d(100vw, 0, 0)';
+            }
+            clone.style.opacity = '0'; // Soft fade out as it flies away
+            
+            // Delete the clone from the HTML once the animation is finished
+            setTimeout(() => clone.remove(), 400); 
+        }
+
+        // F. Handle the subtitle
         if (currentData.subtitle) {
             lightboxSubtitle.innerText = currentData.subtitle;
             lightboxSubtitle.style.backgroundImage = `url(${currentData.src})`;
             lightboxSubtitle.style.width = `${lightboxImage.clientWidth}px`;
             lightboxSubtitle.style.display = 'block';
+            
+            // Allow the subtitle to fade in smoothly behind the image
+            void lightboxSubtitle.offsetWidth;
+            lightboxSubtitle.style.transition = 'opacity 0.3s ease';
+            lightboxSubtitle.style.opacity = '1';
+        } else {
+            lightboxSubtitle.style.display = 'none';
         }
         magnifier.style.backgroundImage = `url(${currentData.src})`;
+
     }).catch(err => console.error("Image load error:", err));
 
-    // Handle navigation button display
+    // G. Preload next/prev images silently
     const showNav = currentGallery.length > 1;
     lightboxPrevBtn.style.display = showNav ? 'flex' : 'none';
     lightboxNextBtn.style.display = showNav ? 'flex' : 'none';
     
-    // 2. NEW: Silently preload adjacent images in the background
     if (showNav) {
         const nextImg = new Image();
         nextImg.src = currentGallery[(currentImageIndex + 1) % currentGallery.length].src;
-        
         const prevImg = new Image();
         prevImg.src = currentGallery[(currentImageIndex - 1 + currentGallery.length) % currentGallery.length].src;
     }
 }
-
-function nextLightboxImage() { currentImageIndex = (currentImageIndex + 1) % currentGallery.length; updateLightboxView(); }
-function prevLightboxImage() { currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length; updateLightboxView(); }
 
 lightboxNextBtn?.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); });
 lightboxPrevBtn?.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); });
