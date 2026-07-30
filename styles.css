@@ -157,38 +157,25 @@ input, textarea {
 /* =========================================
    3. NAVIGATION
 ========================================= */
-/* =========================================
-   3. NAVIGATION
-========================================= */
+/* The Nav Pill Outline */
 .navbar {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    
-    /* Layout & Sizing */
-    width: 90%;
-    max-width: 900px;
-    margin: 1.5rem auto; /* Centers the pill and gives it breathing room */
-    padding: 0.6rem 2rem; /* Adjusted padding for a sleeker profile */
-    
-    /* Sticky Positioning */
-    position: sticky; 
-    top: 1.5rem; /* Sticks slightly below the top edge of the screen */
-    z-index: 1000;
-    
-    /* Aesthetics (The Pill Look) */
+    display: flex; justify-content: space-between; align-items: center;
+    width: 90%; max-width: 1100px; margin: 1.5rem auto; padding: 0.6rem 2rem;
+    position: sticky; top: 1.5rem; z-index: 1000;
     background: rgba(15, 23, 42, 0.85); 
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Wraps the border completely around */
-    border-radius: 50px; /* Creates the perfect pill shape */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Makes it float */
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Restores the nav pill outline */
+    border-radius: 50px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); 
 }
 
 .logo {
-    /* Scaled down slightly from 64px so the pill doesn't get too thick */
     max-width: 45px;
     max-height: 45px;
+    /* The magic centering trick */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-links { list-style: none; display: flex; gap: 2rem; }
@@ -212,16 +199,29 @@ input, textarea {
 .hero { padding: 4rem 5% 2rem 5%; display: flex; flex-direction: column; animation: fadeIn 1s ease-out; position: relative; }
 .hero > *:not(canvas) { position: relative; z-index: 1; }
 
+
+/* The Status Badge Outline */
 .status-badge {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    background-color: var(--card-bg); border: 1px solid rgba(56, 189, 248, 0.3);
+    background-color: rgba(30, 41, 59, 0.5); 
+    border: 1px solid rgba(56, 189, 248, 0.4); /* Restores the badge outline */
     padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem;
-    color: var(--text-muted); margin: 1.5rem 5% 0 5%; width: max-content; position: relative; z-index: 1;
+    color: var(--text-muted); width: max-content; margin: 0;
 }
 
+/* The Blinking Light */
 .pulse-dot {
-    width: 8px; height: 8px; background-color: var(--accent);
-    border-radius: 50%; box-shadow: 0 0 8px var(--accent); animation: pulseGlow 1.5s infinite;
+    display: inline-block;
+    width: 8px; height: 8px; 
+    background-color: var(--accent);
+    border-radius: 50%; 
+    box-shadow: 0 0 10px var(--accent);
+    animation: pulseGlow 2s infinite;
+}
+
+/* Hides the bottom badge on desktop */
+.hero-badge {
+    display: none;
 }
 
 .greeting { color: var(--accent); font-weight: bold;}
@@ -262,7 +262,7 @@ h1::after {
     transform-origin: left; animation: drawLine 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     animation-delay: 0.6s; 
 }
-.gradient-text { background: linear-gradient(var(--text-main) 40%, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.gradient-text { background: linear-gradient(var(--text-main) 40%, var(--accent)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
 .btn {
     display: inline-block; padding: 0.8rem 1.5rem; border: 1px solid var(--accent);
@@ -707,3 +707,87 @@ body.retro-mode::after {
     z-index: 999; pointer-events: none; animation: flicker 0.15s infinite;
 }
 @keyframes flicker { 0% { opacity: 0.05; } 50% { opacity: 0.15; } 100% { opacity: 0.02; } }
+
+/* =========================================
+   MOBILE NAVIGATION OVERRIDE
+========================================= */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap; /* Allows the links to break onto a new line */
+        padding: 1rem 1.2rem;
+        border-radius: 24px; /* Softens the pill into a sleek rounded card */
+    }
+
+    .status-badge {
+        /* Scales the badge down slightly to ensure it fits beautifully next to the logo */
+        font-size: 0.75rem; 
+        padding: 0.3rem 0.8rem;
+        margin: 0;
+        order: 1;
+    }
+
+    .logo {
+        /* Removes the desktop absolute centering so it can sit on the right */
+        position: relative; 
+        left: auto;
+        transform: none;
+        order: 2;
+    }
+
+    .nav-links {
+        /* Forces the links to take up the entire bottom row */
+        width: 100%; 
+        order: 3;
+        
+        /* Spacing and layout for the links */
+        justify-content: space-around; 
+        margin-top: 1rem;
+        padding-top: 1rem;
+        
+        /* Adds a subtle cinematic divider line between the top and bottom rows */
+        border-top: 1px solid rgba(255, 255, 255, 0.1); 
+    }
+}
+
+/* =========================================
+   MOBILE NAVIGATION OVERRIDE
+========================================= */
+@media (max-width: 768px) {
+    
+    /* 1. Toggle the Badges */
+    .nav-badge {
+        display: none !important; 
+    }
+    .hero-badge {
+        display: inline-flex !important; 
+        margin: 2rem auto 0 auto; 
+    }
+
+    /* 2. Flatten the Navbar */
+    .navbar {
+        flex-wrap: nowrap; 
+        padding: 0.6rem 1.5rem; 
+        border-radius: 50px; 
+    }
+
+    /* 3. Layout the Logo & Links */
+    .logo {
+        position: relative; 
+        left: auto;
+        transform: none;
+        max-width: 35px; 
+        max-height: 35px;
+    }
+
+    .nav-links {
+        width: auto; 
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+        gap: 1.2rem; 
+    }
+    
+    .nav-links a {
+        font-size: 0.9rem; 
+    }
+}

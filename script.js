@@ -569,18 +569,38 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
 }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+// =========================================
+// BULLETPROOF SCROLL SPY
+// =========================================
+const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
-const spyObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            const activeLink = document.querySelector(`.nav-links a[href="#${entry.target.getAttribute('id')}"]`);
-            if (activeLink) activeLink.classList.add('active');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    // 1. Calculate absolute positions on every scroll tick
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        // Triggers the highlight when the section reaches the top 1/3 of your screen
+        if (window.scrollY >= sectionTop - (window.innerHeight / 3)) {
+            current = section.getAttribute('id');
         }
     });
-}, { threshold: 0.3, rootMargin: "-100px 0px -30% 0px" });
-document.querySelectorAll('section[id]').forEach(section => spyObserver.observe(section));
 
+    // 2. Fail-Safe: If scrolled to the absolute bottom of the page, force the last link to glow.
+    // This ensures "Contact" always lights up even if the section is too short to reach the top.
+    if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight - 10) {
+        current = sections[sections.length - 1].getAttribute('id');
+    }
+
+    // 3. Apply the glows
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+}, { passive: true }); // passive:true keeps the scrolling buttery smooth
 
 // =========================================
 // 9. KONAMI CODE EASTER EGG
