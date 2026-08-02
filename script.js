@@ -40,7 +40,6 @@ lightboxBackBtn?.addEventListener('click', (e) => {
 });
 
 const modal = document.getElementById('project-modal');
-const closeModalBtn = document.getElementById('close-modal');
 const projectCards = document.querySelectorAll('.project-card');
 const modalTitle = document.getElementById('modal-title');
 const modalTech = document.getElementById('modal-tech');
@@ -125,8 +124,10 @@ document.addEventListener('mouseleave', () => {
 
 // Show cursor when re-entering the browser window
 document.addEventListener('mouseenter', () => {
-    if (cursorDot) cursorDot.style.opacity = '1';
-    if (cursorOutline) cursorOutline.style.opacity = '1';
+    // We set this to an empty string to remove the inline style, 
+    // allowing the CSS classes (like .text-active) to take over!
+    if (cursorDot) cursorDot.style.opacity = '';
+    if (cursorOutline) cursorOutline.style.opacity = '';
 });
 
 // =========================================
@@ -399,7 +400,6 @@ function clearAndCloseModal() {
     modal.close();
     modalExtraMedia.innerHTML = '';
 }
-closeModalBtn.addEventListener('click', clearAndCloseModal);
 modal.addEventListener('click', (e) => { if (e.target === modal) clearAndCloseModal(); });
 
 
@@ -546,9 +546,49 @@ lightboxImage?.addEventListener('mousemove', (event) => {
 });
 lightboxImage?.addEventListener('mouseleave', () => magnifier.style.display = 'none');
 
-// Close lightbox when clicking ANYWHERE (except nav buttons, which stop propagation)
+// =========================================
+// LIGHTBOX SWIPE & CLICK-TO-CLOSE LOGIC
+// =========================================
+let touchStartX = 0;
+let touchEndX = 0;
+let isSwiping = false;
+
+lightboxModal?.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    isSwiping = false; // Reset flag on new touch
+}, { passive: true });
+
+lightboxModal?.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleLightboxSwipe();
+}, { passive: true });
+
+function handleLightboxSwipe() {
+    // Only allow swipe if there are multiple images
+    if (currentGallery.length <= 1) return;
+    
+    const swipeDistance = touchEndX - touchStartX;
+    const swipeThreshold = 40; // Minimum pixels to register as a deliberate swipe
+
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+        isSwiping = true; // Prevents the touchend from triggering a close click
+        
+        if (swipeDistance < -swipeThreshold) {
+            nextLightboxImage(); // Swiped Left
+        } else if (swipeDistance > swipeThreshold) {
+            prevLightboxImage(); // Swiped Right
+        }
+        
+        // Reset the swiping flag shortly after so tapping to close works again
+        setTimeout(() => isSwiping = false, 50);
+    }
+}
+
+// Close lightbox when clicking ANYWHERE (except nav buttons)
 lightboxModal?.addEventListener('click', () => { 
-    lightboxModal.close(); 
+    if (!isSwiping) {
+        lightboxModal.close(); 
+    }
 });
 
 
@@ -709,17 +749,26 @@ if (!mobilePill) {
 function applyDynamicTilt() {
     if (!window.matchMedia("(pointer: coarse)").matches) return;
 
-    const tiltElements = document.querySelectorAll(
-        '.project-card, .modal.enable-tilt #modal-extra-media > *, .modal.enable-tilt .inline-figure'
-    );
+    // 1. Context-Aware Selector (Fixes background cards stealing focus)
+    let selector = '.project-card';
+    if (mainModal && mainModal.hasAttribute('open')) {
+        if (mainModal.classList.contains('enable-tilt')) {
+            selector = '.modal.enable-tilt #modal-extra-media > *, .modal.enable-tilt .inline-figure';
+        } else {
+            selector = ''; // Do nothing if a standard, non-tilt modal is open
+        }
+    }
     
+    const tiltElements = selector ? document.querySelectorAll(selector) : [];
+    if (tiltElements.length === 0) return;
+
     const windowHeight = window.innerHeight;
     const centerY = windowHeight / 2;
 
     let closestElement = null;
     let closestDistance = Infinity;
 
-    // 1. Pass 1: Find the SINGLE element closest to dead center
+    // 2. Find the absolute closest element overall
     tiltElements.forEach(el => {
         const rect = el.getBoundingClientRect();
         const elCenterY = rect.top + (rect.height / 2);
@@ -729,14 +778,19 @@ function applyDynamicTilt() {
 
         const absDist = Math.abs(percentage);
         
-        // Check if within center range AND closer than previous candidates
-        if (absDist < 0.30 && absDist < closestDistance) {
+        if (absDist < closestDistance) {
             closestDistance = absDist;
             closestElement = el;
         }
     });
 
-    // 2. Pass 2: Apply physics (ONLY closestElement pops out, all others tilt)
+    // 3. The Sweet Spot (Inner Boundary)
+    let poppedElement = null;
+    if (closestDistance < 0.30) {
+        poppedElement = closestElement;
+    }
+
+    // 4. Apply physics
     tiltElements.forEach(el => {
         const rect = el.getBoundingClientRect();
         const elCenterY = rect.top + (rect.height / 2);
@@ -746,8 +800,8 @@ function applyDynamicTilt() {
 
         let tiltX, scale, shadowY, shadowBlur, shadowAlpha;
 
-        if (el === closestElement) {
-            // THE POP STATE (Strictly 1 item at a time)
+        if (el === poppedElement) {
+            // THE POP STATE
             tiltX = 0; 
             scale = 1.05; 
             shadowY = 20; 
@@ -766,9 +820,9 @@ function applyDynamicTilt() {
         el.style.boxShadow = `0 ${shadowY}px ${shadowBlur}px rgba(0, 0, 0, ${shadowAlpha})`;
     });
 
-    // 3. Update HUD pill & trigger haptics
-    if (closestElement) {
-        const infoSrc = closestElement.querySelector('.project-info');
+    // 5. HUD Pill & Smart Haptics
+    if (poppedElement) {
+        const infoSrc = poppedElement.querySelector('.project-info');
         if (infoSrc) {
             mobilePill.innerHTML = infoSrc.innerHTML;
             mobilePill.classList.add('visible');
@@ -776,15 +830,23 @@ function applyDynamicTilt() {
             mobilePill.classList.remove('visible');
         }
 
-        if (currentlyPoppedElement !== closestElement) {
-            currentlyPoppedElement = closestElement;
-            if (closestElement.classList.contains('project-card') && navigator.vibrate) {
+        // Trigger Vibration on ANY new element (Cards or Modal Images)
+        if (currentlyPoppedElement !== poppedElement) {
+            currentlyPoppedElement = poppedElement;
+            if (navigator.vibrate) {
                 try { navigator.vibrate(15); } catch (e) {}
             }
         }
     } else {
-        currentlyPoppedElement = null;
         mobilePill.classList.remove('visible');
+        
+        // THE FIX: Hysteresis (Deadzone Outer Boundary)
+        // We only tell the engine to "forget" the card if it scrolls significantly 
+        // away from the sweet spot (0.40 distance). This prevents edge jitter 
+        // while allowing the card to vibrate again upon refocus!
+        if (closestDistance > 0.40) {
+            currentlyPoppedElement = null;
+        }
     }
 }
 
@@ -853,7 +915,42 @@ function openProjectByIndex(index) {
     modalTitle.textContent = title;
     modalTech.innerHTML = tech;
     modalDesc.textContent = desc;
-    modalExtraMedia.innerHTML = hiddenMedia ? hiddenMedia.innerHTML : '';
+    
+    // Clear the previous gallery
+    currentGallery = [];
+
+    if (hiddenMedia) {
+        modalExtraMedia.innerHTML = hiddenMedia.innerHTML;
+
+        if (hiddenMedia.classList.contains('format-collage')) {
+            modalExtraMedia.classList.add('collage-mode');
+        } else {
+            modalExtraMedia.classList.remove('collage-mode'); 
+        }
+
+        // --- RESTORED INITS: Rebuild Carousels & Captions ---
+        initCarousels(modalExtraMedia);
+        initInlineCaptions(modalExtraMedia);
+        
+        // --- RESTORED INITS: Re-wire Lightbox Clicks ---
+        const extraImgs = modalExtraMedia.querySelectorAll('img');
+        extraImgs.forEach(img => {
+            currentGallery.push({
+                src: img.src,
+                subtitle: img.getAttribute('data-subtitle') || ""
+            });
+
+            img.addEventListener('click', () => {
+                currentImageIndex = currentGallery.findIndex(item => item.src === img.src);
+                updateLightboxView();
+                lightboxModal.showModal();
+                bringCursorToFront();
+            });
+        });
+
+    } else {
+        modalExtraMedia.innerHTML = '';
+    }
 
     // Scroll modal back to top
     const modalContent = modal.querySelector('.modal-content');

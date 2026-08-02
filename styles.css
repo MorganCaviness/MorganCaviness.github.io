@@ -733,13 +733,18 @@ footer { text-align: center; padding: 2rem 5%; border-top: 1px solid #1e293b; co
 .lightbox[open] { display: flex; justify-content: center; align-items: center; }
 .lightbox::backdrop { background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(5px); }
 
-#lightbox-container { position: relative; display: flex; flex-direction: column; align-items: center; }
+#lightbox-container { 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding-bottom: 5rem; /* THE FIX: Creates physical space above the fixed capsule */
+}
 .lightbox-image-wrapper { position: relative; display: flex; }
 
 #lightbox-image {
-    /* FIX: 90vw prevents horizontal bleed. 80vh ensures the image and caption both safely fit vertically. */
     max-width: 90vw; 
-    max-height: 80vh; 
+    max-height: 70vh; /* THE FIX: Reduced from 80vh to guarantee room for the caption */
     
     display: block; 
     border-radius: 4px;
