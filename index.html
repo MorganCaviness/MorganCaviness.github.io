@@ -59,7 +59,7 @@
         
         <div class="name-lockup">
             <h1><span class="gradient-text">Morgan Caviness.</span></h1>
-            <h2 class="subtitle">Game Developer & Graphic Designer</h2>
+            <h2 class="subtitle">Graphic Designer & Game Developer</h2>
         </div>
         
         <div class="status-badge hero-badge">
@@ -154,7 +154,7 @@
                 </article>
 
                 <!-- Project 5: Photography -->
-                <article class="project-card">
+                <article class="project-card" data-enable-tilt="true">
                     <img src="images/Photography/Cat-Small.webp" alt="A cat sitting in front of an old car." class="project-image" data-subtitle="A cat sitting in front of an old car.">
                     <div class="project-info">
                         <h3>Photography</h3>
@@ -163,7 +163,7 @@
                     </div>
                     <div class="hidden-media format-collage" style="display: none;">
                         <img src="images/Photography/Rainbow.webp" alt="A rainbow over a red barn in a green corn field.">
-                        <img src="images/Dog.webp" alt="A dalmation barking through a chain-link fence.">
+                        <img src="images/Photography/Dog.webp" alt="A dalmation barking through a chain-link fence.">
                         <img src="images/Photography/Dam.webp" alt="An old spray painted dam gate.">
                         <img src="images/Photography/Biker.webp" alt="A biker.">
                         <img src="images/Photography/Rays.webp" alt="Sun rays shining through cat tails.">
@@ -292,33 +292,40 @@
 
 <!-- Main Project Modal -->
 <dialog id="project-modal" class="modal">
-        <div class="modal-content">
-            <button id="close-modal" class="close-btn">&times;</button>
-            <h3 id="modal-title">Project Title</h3>
-            <div id="modal-tech" class="tech-stack">Tech Stack</div>
-            <p id="modal-desc">Project description goes here.</p>
-            <div id="modal-extra-media" class="extra-media"></div>
-        </div>
-    </dialog>
+    <div class="modal-content">
+        <button id="close-modal" class="close-btn">&times;</button>
+        <h3 id="modal-title">Project Title</h3>
+        <div id="modal-tech" class="tech-stack">Tech Stack</div>
+        <p id="modal-desc">Project description goes here.</p>
+        <div id="modal-extra-media" class="extra-media"></div>
+    </div>
+
+    <div class="modal-nav-capsule">
+        <button id="modal-prev-btn" class="capsule-btn">‹ Prev</button>
+        <button id="modal-back-btn" class="capsule-btn capsule-back">Back</button>
+        <button id="modal-next-btn" class="capsule-btn">Next ›</button>
+    </div>
+</dialog>
 
 <!-- Lightbox Modal -->
-    <dialog id="lightbox-modal" class="lightbox">
-        <div id="lightbox-container">
-            <!-- NEW: The Exit Hint -->
-            <div class="lightbox-hint">Click anywhere or press Esc to exit</div>
-            
-            <button id="lightbox-prev" class="lightbox-nav">‹</button> 
-            
-            <div class="lightbox-image-wrapper">
-                <img id="lightbox-image" src="" alt="Zoomed Project Image">
-                <div id="magnifier"></div>
-            </div>
-            
-            <div id="lightbox-subtitle" class="lightbox-subtitle"></div> 
-            
-            <button id="lightbox-next" class="lightbox-nav">›</button> 
+<dialog id="lightbox-modal" class="lightbox">
+    <div id="lightbox-container">
+        <div class="lightbox-hint">Click anywhere or press Esc to exit</div>
+        
+        <div class="lightbox-image-wrapper">
+            <img id="lightbox-image" src="" alt="Zoomed Project Image">
+            <div id="magnifier"></div>
         </div>
-    </dialog>
+        
+        <div id="lightbox-subtitle" class="lightbox-subtitle"></div>
+
+        <div class="lightbox-nav-capsule">
+            <button id="lightbox-prev-btn" class="capsule-btn">‹ Prev</button>
+            <button id="lightbox-back-btn" class="capsule-btn capsule-back">Back</button>
+            <button id="lightbox-next-btn" class="capsule-btn">Next ›</button>
+        </div>
+    </div>
+</dialog>
 
     <script src="script.js"></script>
 </body>

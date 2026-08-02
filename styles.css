@@ -327,9 +327,50 @@ h1::after {
 }
 .project-image.align-top { object-position: top; }
 
+/* Update the base project-info to include a downward offset */
 .project-info {
     position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85);
-    display: flex; flex-direction: column; justify-content: center; padding: 2rem; opacity: 0; transition: opacity 0.3s ease;
+    display: flex; flex-direction: column; justify-content: center; padding: 2rem; 
+    
+    /* Start hidden and pushed down slightly */
+    opacity: 0; 
+    transform: translateY(15px); 
+    
+    /* Smooth transition for both fading and sliding */
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- THE FIX --- */
+/* 1. Mobile Pop State (Triggered ONLY by our JS scroll engine) */
+.project-card.is-popped .project-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 2. Desktop Hover State (Ignored completely by touch screens) */
+@media (pointer: fine) {
+    .project-card:hover .project-info {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Move the image scale here so touch screens don't double-scale! */
+    .project-card:hover .project-image {
+        transform: scale(1.05);
+    }
+}
+
+/* Mobile-Specific Tweaks */
+@media (pointer: coarse) {
+    /* Create the "moment after" delay */
+    .project-card.is-popped .project-info {
+        transition-delay: 0.15s; 
+    }
+    
+    /* We can also trigger the desktop image zoom on mobile pop! */
+    .project-card.is-popped .project-image {
+        transform: scale(1.05);
+    }
 }
 
 .tech-stack { font-size: 0.85rem; color: var(--accent); margin-bottom: 1rem; font-family: monospace; }
@@ -465,10 +506,58 @@ footer { text-align: center; padding: 2rem 5%; border-top: 1px solid #1e293b; co
     box-shadow: 0 4px 20px rgba(0,0,0, 0.3); 
 }
 
+/* 1. Base Close Button Styles */
 .close-btn {
-    position: absolute; top: 1rem; right: 1.5rem; background: none; border: none;
-    color: var(--text-main); font-size: 2rem; transition: color 0.3s;
+    position: absolute; 
+    top: 1rem; 
+    right: 1.5rem; 
+    background: none; 
+    border: none;
+    color: var(--text-main); 
+    font-size: 2rem; 
+    transition: color 0.3s;
+    
+    /* Force strip mobile highlights and native appearances */
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-appearance: none !important; 
 }
+
+/* 2. Brute-force remove all focus/active outlines universally */
+.close-btn:focus,
+.close-btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* 3. Safely restore the outline ONLY for desktop keyboard users (Tab navigation) */
+.close-btn:focus-visible {
+    outline: 2px solid var(--accent) !important;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* 4. Desktop Hover State */
+@media (pointer: fine) {
+    .close-btn:hover { 
+        color: var(--accent); 
+    }
+}
+
+/* 5. Mobile Touch State (Prevents Sticky Hover) */
+@media (pointer: coarse) {
+    .close-btn:hover {
+        color: var(--text-main); /* Ignores sticky hovers on touch */
+    }
+    .close-btn:active {
+        color: var(--accent); /* Only turns blue while physically touching the screen */
+    }
+}
+
+.close-btn:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+}
+
 .close-btn:hover { color: var(--accent); }
 
 #modal-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: monospace; margin-bottom: 1rem; }
@@ -676,16 +765,61 @@ footer { text-align: center; padding: 2rem 5%; border-top: 1px solid #1e293b; co
     transform: scaleY(-1); filter: blur(15px) brightness(0.35); z-index: -1;
 }
 
-.lightbox-nav {
-    position: fixed; top: 50%; transform: translateY(-50%); background-color: var(--accent-alt); color: var(--bg-color);
-    border: none; border-radius: 6px; width: 45px; height: 120px; font-size: 1.5rem; display: flex;
-    align-items: center; justify-content: center; z-index: 1000; transition: background-color 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+/* =========================================
+   LIGHTBOX NAVIGATION CAPSULE
+========================================= */
+
+/* Remove old edge button styles if any remain */
+.lightbox-nav,
+#lightbox-prev,
+#lightbox-next {
+    display: none !important;
 }
+
+.lightbox-nav-capsule {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .lightbox-nav-capsule {
+        bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+        width: max-content;
+        max-width: 90%;
+    }
+}
+
+/* Touch feedback when pressing lightbox buttons */
+.lightbox-nav:active {
+    transform: scale(0.92) !important;
+    background: rgba(56, 189, 248, 0.3);
+}
+
+/* Mobile screen edge padding & safe-area handling */
+@media (max-width: 768px) {
+    .lightbox-nav {
+        bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    }
+    #lightbox-prev { left: 1.25rem; }
+    #lightbox-next { right: 1.25rem; }
+}
+
 .lightbox-nav:hover { background-color: var(--accent); transform: translateY(-50%) scale(1.05); }
-#lightbox-prev { left: 2rem; }
-#lightbox-next { right: 2rem; }
-@media (max-width: 768px) { #lightbox-prev { left: 0.75rem; } #lightbox-next { right: 0.75rem; } }
 
 /* --- LIGHTBOX EXIT HINT --- */
 .lightbox-hint {
@@ -842,5 +976,233 @@ body.retro-mode::after {
     
     .nav-links a {
         font-size: 0.9rem; 
+    }
+}
+
+/* =========================================
+   MOBILE SCROLL SNAPPING & GLOBAL PILL
+========================================= */
+
+@media (pointer: coarse) {
+    /* Change 'proximity' to 'mandatory' for a stronger magnetic pull */
+    html {
+        scroll-snap-type: y mandatory;
+        scroll-padding: 2rem 0; /* Ensures snapped cards leave comfortable top/bottom breathing room */
+    }
+    
+    .project-card {
+        scroll-snap-align: center;
+        scroll-snap-stop: normal; /* Allows smooth flick-scrolling through cards without hard stops */
+    }
+    
+    /* Internal modal snap snapping */
+    .modal-content {
+        scroll-snap-type: y mandatory;
+    }
+    
+    #modal-extra-media > * {
+        scroll-snap-align: center;
+    }
+
+    .project-card .project-info {
+        display: none !important;
+    }
+}
+
+/* 3. The Global Floating Pill */
+/* =========================================
+   FULL-WIDTH MOBILE INFO BAR (NAVBAR MATCH)
+========================================= */
+
+#global-mobile-pill {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    
+    /* Exact navbar glassmorphism styling */
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+    
+    /* Padding includes safe-area for mobile devices with gesture bars */
+    padding: 1rem 1.5rem calc(1rem + env(safe-area-inset-bottom, 0px)) 1.5rem;
+    z-index: 9999;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+    
+    /* Hide off the bottom edge by default */
+    pointer-events: none; 
+    opacity: 0;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    pointer-events: none; /* Default: cannot click while hidden */
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                opacity 0.3s ease, 
+                background-color 0.2s ease;
+}
+
+/* Slide up into position when centered */
+#global-mobile-pill.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   ANDROID TYPOGRAPHY & HIERARCHY FIX
+========================================= */
+
+/* 1. Force Jua font and lock text scaling */
+#global-mobile-pill,
+#global-mobile-pill * {
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+    font-family: 'Jua', sans-serif !important;
+}
+
+/* =========================================
+   MOBILE INFO BAR - HIDE PREVIEW TAGS
+========================================= */
+
+/* 1. Completely remove tech stack tags from the mobile bottom bar */
+#global-mobile-pill .tech-stack { 
+    display: none !important; 
+}
+
+/* 2. Project Title */
+#global-mobile-pill h3 { 
+    margin: 0 0 4px 0 !important; 
+    font-size: 1.1rem !important; 
+    color: var(--accent) !important; 
+}
+
+/* 3. Description Paragraph */
+#global-mobile-pill p { 
+    margin: 0 !important; 
+    font-size: 0.9rem !important; 
+    color: var(--text-main) !important; 
+    opacity: 0.9 !important; 
+    line-height: 1.35 !important;
+    display: -webkit-box !important; 
+    -webkit-line-clamp: 2 !important; 
+    -webkit-box-orient: vertical !important; 
+    overflow: hidden !important; 
+}
+
+/* 5. Tech Stack Tags (Subtle, unboxed text tags for Android) */
+#global-mobile-pill .tech-stack span,
+#global-mobile-pill .tech-stack * {
+    font-family: 'Jua', sans-serif !important;
+    font-size: 0.75rem !important; 
+    font-weight: 400 !important; /* CRITICAL: Prevents Android from falling back to Roboto */
+    color: var(--accent) !important;
+    opacity: 0.8 !important;
+    background: transparent !important; /* Removes bulky button background */
+    border: none !important;            /* Strips box outline */
+    padding: 0 !important;               /* Removes extra height padding */
+    box-shadow: none !important;
+    line-height: 1.2 !important;
+}
+
+/* Adds subtle bullet dots between unboxed tags */
+#global-mobile-pill .tech-stack span:not(:last-child)::after {
+    content: " •";
+    margin-left: 4px;
+    margin-right: 2px;
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+/* Enable touch/click events ONLY when the bar slides into view */
+#global-mobile-pill.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; 
+}
+
+/* Tactile press effect when tapped */
+#global-mobile-pill:active {
+    background: rgba(30, 41, 59, 0.9) !important; /* Slightly brightens on press */
+    transform: translateY(2px) scale(0.99);        /* Subtle downward press feel */
+}
+
+/* =========================================
+   PROJECT MODAL NAVIGATION CAPSULE
+========================================= */
+
+.modal-nav-capsule {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.capsule-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.capsule-btn:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.capsule-btn:active {
+    transform: scale(0.95);
+}
+
+/* Stylized Back Button */
+.capsule-btn.capsule-back {
+    color: var(--accent);
+    font-weight: bold;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.capsule-btn.capsule-back:hover {
+    background: rgba(56, 189, 248, 0.3);
+    color: #fff;
+}
+
+/* Extra bottom padding so capsule doesn't cover modal content */
+.modal-content {
+    padding-bottom: 5.5rem !important;
+}
+
+@media (max-width: 768px) {
+    .modal-nav-capsule {
+        bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+        width: max-content;
+        max-width: 90%;
     }
 }

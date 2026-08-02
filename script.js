@@ -14,8 +14,30 @@ const lightboxImage = document.getElementById('lightbox-image');
 const lightboxContainer = document.getElementById('lightbox-container');
 const magnifier = document.getElementById('magnifier');
 const lightboxSubtitle = document.getElementById('lightbox-subtitle');
-const lightboxPrevBtn = document.getElementById('lightbox-prev');
-const lightboxNextBtn = document.getElementById('lightbox-next');
+
+const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
+const lightboxNextBtn = document.getElementById('lightbox-next-btn');
+const lightboxBackBtn = document.getElementById('lightbox-back-btn');
+
+// 2. Lightbox Capsule Event Listeners
+lightboxPrevBtn?.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevents clicking the backdrop exit trigger
+    currentImageIndex--;
+    if (currentImageIndex < 0) currentImageIndex = currentGallery.length - 1;
+    updateLightboxImage();
+});
+
+lightboxNextBtn?.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevents clicking the backdrop exit trigger
+    currentImageIndex++;
+    if (currentImageIndex >= currentGallery.length) currentImageIndex = 0;
+    updateLightboxImage();
+});
+
+lightboxBackBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    lightboxModal.close();
+});
 
 const modal = document.getElementById('project-modal');
 const closeModalBtn = document.getElementById('close-modal');
@@ -303,6 +325,12 @@ projectCards.forEach(card => {
     card.addEventListener('click', () => {
         modalTitle.innerText = card.querySelector('h3').innerText;
         modalDesc.innerText = card.querySelector('p:not(.tech-stack)').innerText;
+        
+        if (card.dataset.enableTilt === 'true') {
+            modal.classList.add('enable-tilt');
+        } else {
+            modal.classList.remove('enable-tilt');
+        }
         
         modalTech.innerHTML = '';
         card.querySelector('.tech-stack').innerText.split('•').map(t => t.trim()).forEach(tag => {
@@ -652,24 +680,196 @@ contactForm?.addEventListener('submit', async (e) => {
 });
 
 // =========================================
-// 11. MOBILE SCROLL TILT
+// 11. UNIVERSAL 3D TILT & POP-OUT ENGINE
 // =========================================
-if (window.matchMedia("(hover: none), (pointer: coarse)").matches) {
-    window.addEventListener('scroll', () => {
-        const screenCenter = window.innerHeight / 2;
-        
-        projectCards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            const cardCenter = rect.top + rect.height / 2;
-            const distance = cardCenter - screenCenter;
-            
-            // Apply a smooth 3D tilt to EVERY card on screen
-            // The further from the center, the more it tilts (capped at 15 degrees)
-            let rotateX = (distance / screenCenter) * 15;
-            rotateX = Math.max(-15, Math.min(15, rotateX)); 
-            
-            card.style.transform = `perspective(1000px) scale(1.03) rotateX(${rotateX}deg) rotateY(0deg)`;
-        });
-        
+
+const mainModal = document.querySelector('.modal');
+let currentlyPoppedElement = null; 
+
+let mobilePill = document.getElementById('global-mobile-pill');
+if (!mobilePill) {
+    mobilePill = document.createElement('div');
+    mobilePill.id = 'global-mobile-pill';
+    document.body.appendChild(mobilePill);
+
+    mobilePill.addEventListener('click', () => {
+        if (currentlyPoppedElement) {
+            const card = currentlyPoppedElement.closest('.project-card') || currentlyPoppedElement;
+            card.click();
+        }
+    });
+
+    mobilePill.addEventListener('touchstart', () => {
+        if (navigator.vibrate) {
+            try { navigator.vibrate(15); } catch (e) {}
+        }
     }, { passive: true });
 }
+
+function applyDynamicTilt() {
+    if (!window.matchMedia("(pointer: coarse)").matches) return;
+
+    const tiltElements = document.querySelectorAll(
+        '.project-card, .modal.enable-tilt #modal-extra-media > *, .modal.enable-tilt .inline-figure'
+    );
+    
+    const windowHeight = window.innerHeight;
+    const centerY = windowHeight / 2;
+
+    let closestElement = null;
+    let closestDistance = Infinity;
+
+    // 1. Pass 1: Find the SINGLE element closest to dead center
+    tiltElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const elCenterY = rect.top + (rect.height / 2);
+        const distFromCenter = elCenterY - centerY;
+        let percentage = distFromCenter / (windowHeight / 2);
+        percentage = Math.max(-1, Math.min(1, percentage));
+
+        const absDist = Math.abs(percentage);
+        
+        // Check if within center range AND closer than previous candidates
+        if (absDist < 0.30 && absDist < closestDistance) {
+            closestDistance = absDist;
+            closestElement = el;
+        }
+    });
+
+    // 2. Pass 2: Apply physics (ONLY closestElement pops out, all others tilt)
+    tiltElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const elCenterY = rect.top + (rect.height / 2);
+        const distFromCenter = elCenterY - centerY;
+        let percentage = distFromCenter / (windowHeight / 2);
+        percentage = Math.max(-1, Math.min(1, percentage));
+
+        let tiltX, scale, shadowY, shadowBlur, shadowAlpha;
+
+        if (el === closestElement) {
+            // THE POP STATE (Strictly 1 item at a time)
+            tiltX = 0; 
+            scale = 1.05; 
+            shadowY = 20; 
+            shadowBlur = 40; 
+            shadowAlpha = 0.7;
+        } else {
+            // THE TILT STATE
+            tiltX = percentage * 15; 
+            scale = 1.0; 
+            shadowY = 4; 
+            shadowBlur = 10; 
+            shadowAlpha = 0.3;
+        }
+
+        el.style.transform = `perspective(1000px) rotateX(${tiltX}deg) scale(${scale})`;
+        el.style.boxShadow = `0 ${shadowY}px ${shadowBlur}px rgba(0, 0, 0, ${shadowAlpha})`;
+    });
+
+    // 3. Update HUD pill & trigger haptics
+    if (closestElement) {
+        const infoSrc = closestElement.querySelector('.project-info');
+        if (infoSrc) {
+            mobilePill.innerHTML = infoSrc.innerHTML;
+            mobilePill.classList.add('visible');
+        } else {
+            mobilePill.classList.remove('visible');
+        }
+
+        if (currentlyPoppedElement !== closestElement) {
+            currentlyPoppedElement = closestElement;
+            if (closestElement.classList.contains('project-card') && navigator.vibrate) {
+                try { navigator.vibrate(15); } catch (e) {}
+            }
+        }
+    } else {
+        currentlyPoppedElement = null;
+        mobilePill.classList.remove('visible');
+    }
+}
+
+window.addEventListener('scroll', () => requestAnimationFrame(applyDynamicTilt));
+if (mainModal) {
+    mainModal.addEventListener('scroll', () => requestAnimationFrame(applyDynamicTilt));
+}
+
+// =========================================
+// 12. TACTILE HAPTIC FEEDBACK
+// =========================================
+
+function initHaptics() {
+    // 1. Only run on touch devices
+    if (!window.matchMedia("(pointer: coarse)").matches) return;
+    
+    // 2. Exit immediately if the Vibration API isn't supported (iOS Safari)
+    if (!navigator.vibrate) return; 
+
+    // 3. Target every button that should feel physical
+    const tactileElements = document.querySelectorAll(
+        '.nav-links a, .close-btn, .btn, .filter-banner button, .carousel-btn'
+    );
+
+    tactileElements.forEach(el => {
+        // 4. Use 'touchstart' for zero-latency response
+        el.addEventListener('touchstart', () => {
+            navigator.vibrate(15);
+        }, { passive: true }); 
+        // Note: { passive: true } tells the browser this won't block scrolling, keeping performance butter-smooth.
+    });
+}
+
+// Boot up the haptic engine once the page loads
+document.addEventListener('DOMContentLoaded', initHaptics);
+
+// Track the index of the currently open project card
+let currentProjectIndex = 0;
+
+const modalPrevBtn = document.getElementById('modal-prev-btn');
+const modalNextBtn = document.getElementById('modal-next-btn');
+const modalBackBtn = document.getElementById('modal-back-btn');
+
+// Helper function to open project by index
+function openProjectByIndex(index) {
+    const cards = Array.from(projectCards);
+    if (index < 0) index = cards.length - 1;
+    if (index >= cards.length) index = 0;
+    
+    currentProjectIndex = index;
+    const targetCard = cards[currentProjectIndex];
+
+    // Check data-enable-tilt
+    if (targetCard.dataset.enableTilt === 'true') {
+        modal.classList.add('enable-tilt');
+    } else {
+        modal.classList.remove('enable-tilt');
+    }
+
+    // Populate Modal Content
+    const title = targetCard.querySelector('h3')?.textContent || '';
+    const tech = targetCard.querySelector('.tech-stack')?.innerHTML || '';
+    const desc = targetCard.querySelector('p:not(.tech-stack)')?.textContent || '';
+    const hiddenMedia = targetCard.querySelector('.hidden-media');
+
+    modalTitle.textContent = title;
+    modalTech.innerHTML = tech;
+    modalDesc.textContent = desc;
+    modalExtraMedia.innerHTML = hiddenMedia ? hiddenMedia.innerHTML : '';
+
+    // Scroll modal back to top
+    const modalContent = modal.querySelector('.modal-content');
+    if (modalContent) modalContent.scrollTop = 0;
+
+    if (!modal.open) modal.showModal();
+}
+
+// Attach click listeners to cards to save index
+projectCards.forEach((card, index) => {
+    card.addEventListener('click', () => {
+        openProjectByIndex(index);
+    });
+});
+
+// Capsule Button Listeners
+modalPrevBtn?.addEventListener('click', () => openProjectByIndex(currentProjectIndex - 1));
+modalNextBtn?.addEventListener('click', () => openProjectByIndex(currentProjectIndex + 1));
+modalBackBtn?.addEventListener('click', () => modal.close());
