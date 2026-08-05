@@ -25,16 +25,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="images/Favicon.svg">
+    <link rel="stylesheet" href="styles.css?v=20260805">
+    <link rel="icon" type="image/svg+xml" href="images/Favicon.svg">
 </head>
 
 <body>
-    
+
     <!-- Custom Cursor -->
     <div id="custom-cursor-dot" popover="manual"></div>
     <div id="custom-cursor-outline" popover="manual"></div>
-        
+
     <nav class="navbar">
         <div class="status-badge nav-badge">
             <span class="pulse-dot"></span>
@@ -42,7 +42,7 @@
         </div>
 
         <img class="logo" src="images/Branding/BigPlainInvertLogo-White.svg" alt="Morgan Caviness Logo">
-        
+
         <ul class="nav-links">
             <li><a href="#work">Work</a></li>
             <li><a href="#about">About</a></li>
@@ -56,45 +56,42 @@
 
     <header class="hero">
         <p class="greeting">Hello, I am</p>
-        
+
         <div class="name-lockup">
             <h1><span class="gradient-text">Morgan Caviness.</span></h1>
             <h2 class="subtitle">Graphic Designer & Game Developer</h2>
         </div>
-        
+
         <div class="status-badge hero-badge">
             <span class="pulse-dot"></span>
             Status: Seeking a Design Job
         </div>
-        
+
         <p class="hero-description">Specializing in creating engaging digital experiences, combining technical logic with strong visual design.</p>
     </header>
 
         <section id="work" class="portfolio-section">
             <h2 class="section-title">Featured Work</h2>
-            
+
             <!-- Active Filter Status Banner -->
-            <div id="filter-banner" class="filter-banner">
+            <div id="filter-banner" class="filter-banner" hidden>
                 <span id="filter-text">Showing projects tagged with: <strong></strong></span>
                 <button id="clear-filter-btn">Show All Projects</button>
             </div>
-            
+
             <div class="project-grid">
-                <!-- Project 1: Cully Bubble -->
                 <article class="project-card">
                     <img src="images/CullyBubble/Thumbnail-Small.webp" alt="Screenshot of Cully Bubble" class="project-image">
                     <div class="project-info">
                         <h3>Cully Bubble</h3>
                         <p class="tech-stack">Unreal Engine 5 • Gaming</p>
-                        <p>My Mobile Game<br>Coming Soon!</p>
+                        <p>My Mobile Game | Coming Soon!</p>
                     </div>
-                    <div class="hidden-media" style="display: none;">
-                        <iframe src="https://player.vimeo.com/video/1211407632?badge=0&byline=0&portrait=0&color=38bdf8" width="560" height="315" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                        <div class="tight-text">
-                            <p>Cully Bubble is a calm gaming experience with a soothing soundtrack and satisfying mechanics.</p>
-                            <p>The original prototype was built in an hour or two, and was only intended for my nephew. His enjoyment motivated me through months of development.</p>
-                        </div>
-                        <div class="carousel show-caption" data-subtitle="Screenshots from the game.">
+                    <div class="hidden-media" hidden>
+                        <iframe src="https://player.vimeo.com/video/1211407632?badge=0&byline=0&portrait=0&color=38bdf8" width="560" height="315" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+                        <p>Cully Bubble is a calm gaming experience with a soothing soundtrack and satisfying mechanics.</p>
+                        <h4>Screenshots</h4>
+                        <div class="carousel">
                             <img src="images/CullyBubble/Screenshots/0.webp" alt="Cully Bubble Screenshot">
                             <img src="images/CullyBubble/Screenshots/1.webp" alt="Cully Bubble Screenshot">
                             <img src="images/CullyBubble/Screenshots/2.webp" alt="Cully Bubble Screenshot">
@@ -103,29 +100,21 @@
                             <img src="images/CullyBubble/Screenshots/5.webp" alt="Cully Bubble Screenshot">
                             <img src="images/CullyBubble/Screenshots/6.webp" alt="Cully Bubble Screenshot">
                             <img src="images/CullyBubble/Screenshots/7.webp" alt="Cully Bubble Screenshot">
-                        </div>              
-                        <div class="carousel show-caption" data-subtitle="My nephew and me playing early builds.">
-                            <img src="images/CullyBubble/Dev/0.webp" alt="My nephew and me playing the original prototype the day I made it." data-subtitle="My nephew and me playing the original prototype the day I made it.">
-                            <img src="images/CullyBubble/Dev/1.webp" alt="My nephew playing an early build of Cully Bubble." data-subtitle="My nephew playing an early build of Cully Bubble.">
-                            <img src="images/CullyBubble/Dev/3.webp" alt="My nephew and me playing a later build." data-subtitle="My nephew and me playing a later build.">
                         </div>
+                        <button class="btn" onclick="window.open('https://play.google.com/store/apps/details?id=com.morgancaviness.bubbles', '_blank')">Play Store Page</button>
+                        <button class="btn" onclick="window.open('https://groups.google.com/g/bubbles-beta', '_blank')">Join the Android Closed Beta</button>
                     </div>
                 </article>
 
-                <!-- Project 2: Hansel and Gretel -->
                 <article class="project-card">
-                    <img src="images/HanselAndGretel/Render-Small.webp" alt="Hansel and Gretel book cover design" class="project-image">
+                    <img src="images/Typewriter/0-Small.webp" alt="A person typing next to a small device." class="project-image">
                     <div class="project-info">
-                        <h3>Hansel and Gretel Book Cover</h3>
-                        <p class="tech-stack">Adobe • Photoshop • Illustrator • Graphic Design</p>
-                        <p>A reimagined book cover design for the classic fairy tale.</p>
-                    </div>
-                    <div class="hidden-media" style="display: none;">
-                        <img src="images/HanselAndGretel/Render.webp" alt="Hansel and Gretel book cover design">
+                        <h3>Typewriter</h3>
+                        <p class="tech-stack">Photography</p>
+                        <p>An electronic typewriter I designed and built.</p>
                     </div>
                 </article>
 
-                <!-- Project 3: Digital Bazooka -->
                 <article class="project-card">
                     <img src="images/DigitalBazooka/Logo-Small.webp" alt="Digital Bazooka Logo" class="project-image align-top">
                     <div class="project-info">
@@ -133,13 +122,12 @@
                         <p class="tech-stack">DaVinci Resolve • Affinity • Video Editing • Graphic Design</p>
                         <p>An intro video for the Digital Bazooka podcast.</p>
                     </div>
-                    <div class="hidden-media" style="display: none;">
-                        <iframe src="https://player.vimeo.com/video/1211404852?byline=0&portrait=0&color=38bdf8" width="560" height="315" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    <div class="hidden-media" hidden>
+                        <iframe src="https://player.vimeo.com/video/1211404852?byline=0&portrait=0&color=38bdf8" width="560" height="315" allow="autoplay; fullscreen; picture-in-picture"></iframe>
                         <img src="images/DigitalBazooka/Logo.webp" alt="A soldier firing a bazooka with the words &quot;DIGITAL BAZOOKA.&quot;">
                     </div>
                 </article>
 
-                <!-- Project 4: Pitty Logo -->
                 <article class="project-card">
                     <img src="images/Pitty/Logo-Small.webp" alt="Pitty Logo" class="project-image">
                     <div class="project-info">
@@ -147,104 +135,121 @@
                         <p class="tech-stack">Affinity • Branding • Logo • Graphic Design</p>
                         <p>A logo for the PittyOfficial Twitch channel.</p>
                     </div>
-                    <div class="hidden-media" style="display: none;">
+                    <div class="hidden-media" hidden>
                         <img src="images/Pitty/Logo.webp" alt="Pitty Logo">
                         <img src="images/Pitty/Celestial.webp" alt="A colorful version of the logo." data-subtitle="A version just for fun." class="show-caption">
                     </div>
                 </article>
 
-                <!-- Project 5: Photography -->
-                <article class="project-card" data-enable-tilt="true">
-                    <img src="images/Photography/Cat-Small.webp" alt="A cat sitting in front of an old car." class="project-image" data-subtitle="A cat sitting in front of an old car.">
+                <article class="project-card">
+                    <img src="images/Photography/Cat-Small.webp" alt="A cat sitting in front of an old car." class="project-image">
                     <div class="project-info">
                         <h3>Photography</h3>
                         <p class="tech-stack">Adobe • Lightroom • Photography</p>
                         <p>Selected photographs from my portfolio.</p>
                     </div>
-                    <div class="hidden-media format-collage" style="display: none;">
+                    <div class="hidden-media format-collage" hidden>
                         <img src="images/Photography/Rainbow.webp" alt="A rainbow over a red barn in a green corn field.">
-                        <img src="images/Photography/Dog.webp" alt="A dalmation barking through a chain-link fence.">
-                        <img src="images/Photography/Dam.webp" alt="An old spray painted dam gate.">
-                        <img src="images/Photography/Biker.webp" alt="A biker.">
                         <img src="images/Photography/Rays.webp" alt="Sun rays shining through cat tails.">
-                        <img src="images/Photography/Vines.webp" alt="A wall with vines.">
-                        <img src="images/Photography/Shoe.webp" alt="A Converse shoe being tied.">
-                        <img src="images/Photography/Lady.webp" alt="A woman.">
-                        <img src="images/Photography/Cook.webp" alt="A cook in a food truck.">
-                        <img src="images/Photography/Waterfall.webp" alt="A small waterfall.">
-                        <img src="images/Photography/WakeUp.webp" alt="A creepy abandoned building.">
+                        <img src="images/Photography/Dam.webp" alt="An old spray painted dam gate.">
+                        <img src="images/Photography/Cat.webp" alt="A cat sitting in front of an old car.">
                         <img src="images/Photography/Camaro.webp" alt="An old Chevrolet Camaro with its hood up.">
-                        <img src="images/Photography/Corrupt.webp" alt="A fenced-off building.">
+                        <img src="images/Photography/WakeUp.webp" alt="A creepy abandoned building.">
                         <img src="images/Photography/Squirrel.webp" alt="A squirrel." data-subtitle="Squirrels are one of my favorite animals.">
-                        <img src="images/Photography/Caustics.webp" alt="A person's shadow on a pool floor.">
-                        <img src="images/Photography/Streamers.webp" alt="A skylight over crisscrossing streamers.">
-                        <img src="images/Photography/Guitar.webp" alt="A man playing a white electric guitar outside.">
+                        <img src="images/Photography/Waterfall.webp" alt="A small waterfall.">
+                        <img src="images/Photography/Vines.webp" alt="A wall with vines.">
+                        <img src="images/Photography/Peach.webp" alt="A rain gutter with &quot;peach&quot; graffitied on it overgrown with vines.">
+                        <img src="images/Photography/Dog.webp" alt="A dalmation barking through a chain-link fence.">
+                        <img src="images/Photography/Corrupt.webp" alt="A fenced-off building.">
                         <img src="images/Photography/Rad.webp" alt="An old door with a sign that reads: &quot;CAUTION RADIATION AREA.&quot;">
+                        <img src="images/Photography/Caustics.webp" alt="A person's shadow on a pool floor.">
+                        <img src="images/Photography/Greenhouse.webp" alt="The exterior of a greenhouse.">
+                        <img src="images/Photography/Streamers.webp" alt="A skylight over crisscrossing streamers.">
+                        <img src="images/Photography/Biker.webp" alt="A biker.">
+                        <img src="images/Photography/Shoe.webp" alt="A Converse shoe being tied.">
+                        <img src="images/Photography/Guitar.webp" alt="A man playing a white electric guitar outside.">
+                        <img src="images/Photography/Cook.webp" alt="A cook in a food truck.">
+                        <img src="images/Photography/Glass.webp" alt="A couple at a claw machine, seen through a cracked window.">
+                        <img src="images/Photography/AJFA.webp" alt="A mural under big letters that read &quot;WITH LIBERTY AND JUSTICE.&quot;">
+                        <img src="images/Photography/Lady.webp" alt="A woman.">
                     </div>
                 </article>
 
-                <!-- Project 6: Drawing -->
-                <article class="project-card">
-                    <img src="images/Drawings/LamarPen-Small.webp" alt="A pen drawing." class="project-image" data-subtitle="A pen drawing based on photos taken of the abandoned Lamar School Annex in San Marcos, Texas.">
-                    <div class="project-info">
-                        <h3>Drawings</h3>
-                        <p class="tech-stack">Drawing • Physical Art</p>
-                        <p>Selected drawings from my portfolio.</p>
-                    </div>
-                    <div class="hidden-media" style="display: none;">
-                        <img src="images/Drawings/LamarPen.webp" alt="A pen drawing of industrial signage and elements." data-subtitle="A pen drawing based on photos I took of the abandoned Lamar School Annex in San Marcos, Texas.">
-                        <img src="images/Drawings/Leah.webp" alt="A pencil drawing of a building." data-subtitle="Another artistic piece.">
-                    </div>
-                </article>
-
-<!-- Project 7: BrainWash -->
                 <article class="project-card">
                     <img src="images/BrainWash/BrainWash-Small.webp" alt="BrainWash Logo" class="project-image">
                     <div class="project-info">
                         <h3>BrainWash</h3>
                         <p class="tech-stack">Adobe • Illustrator • Photoshop • Branding • Logo • Graphic Design</p>
-                        <p>A logo for a shampoo brand.</p>
+                        <p>A logo for a fictional shampoo brand.</p>
                     </div>
-                    <div class="hidden-media" style="display: none;">
+                    <div class="hidden-media" hidden>
                         <img src="images/BrainWash/BrainWash.webp" alt="BrainWash Logo">
                     </div>
                 </article>
 
-<!-- Project 8: Calendar -->
+                <article class="project-card">
+                    <img src="images/Drawings/LamarPen-Small.webp" alt="A pen drawing." class="project-image">
+                    <div class="project-info">
+                        <h3>Drawings</h3>
+                        <p class="tech-stack">Drawing • Physical</p>
+                        <p>Selected drawings from my portfolio.</p>
+                    </div>
+                    <div class="hidden-media" hidden>
+                        <img class="show-caption" src="images/Drawings/LamarPen.webp" alt="A pen drawing of industrial signage and elements." data-subtitle="A pen drawing based on photos I took of the abandoned Lamar School Annex in San Marcos, Texas.">
+                        <img class="show-caption" src="images/Drawings/Leah.webp" alt="A pencil drawing of a building." data-subtitle="A pencil drawing of my old apartment, using a camera obscura.">
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <img src="images/CrystalGoblet/0-Small.webp" alt="More Projects" class="project-image">
+                    <div class="project-info">
+                        <h3>More Projects</h3>
+                        <p class="tech-stack">Various</p>
+                        <p>A booklet.</p>
+                    </div>
+                </article>
+
                 <article class="project-card">
                     <img src="images/Calendar/Invert.webp" alt="A September calendar page." class="project-image align-top">
                     <div class="project-info">
                         <h3>September Calendar</h3>
                         <p class="tech-stack">Adobe • InDesign • Affinity • Graphic Design</p>
-                        <p>A calendar design for the month of September. It was originally created as a school project, but I had so much fun, I think I might make a full version for 2027.</p>
+                        <p>A calendar design for the month of September.</p>
                     </div>
-                    <div class="hidden-media" style="display: none;">
+                    <div class="hidden-media" hidden>
                         <img src="images/Calendar/Invert.webp" alt="A dark version of the design.">
-                        <h4>An Alternative, Bright Version</h4>
-                        <img src="images/Calendar/Orange.webp" alt="An orange version of the design.">
+                        <img class="show-caption" src="images/Calendar/Orange.webp" alt="An orange version of the design." data-subtitle="An alternative, bright version of the design.">
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <img src="images/HanselAndGretel/Render-Small.webp" alt="Hansel and Gretel book cover design" class="project-image">
+                    <div class="project-info">
+                        <h3>Hansel and Gretel Book Cover</h3>
+                        <p class="tech-stack">Adobe • Photoshop • Illustrator • Graphic Design</p>
+                        <p>A reimagined book cover design for the classic fairy tale.</p>
+                    </div>
+                    <div class="hidden-media" hidden>
+                        <img src="images/HanselAndGretel/Render.webp" alt="Hansel and Gretel book cover design">
                     </div>
                 </article>
 
             </div>
-            
+
             <div class="emitter-bar"></div>
         </section>
     </div>
-    
+
 <!-- About Section -->
 <section id="about" class="about-section">
     <h2 class="section-title reveal">About Me</h2>
-    
+
     <div class="about-content">
-        
-        <!-- COLUMN 1: Text -->
+
         <div class="about-text reveal">
-            <p>I am a game developer and graphic designer with a passion for bringing ideas to life, both on screen and in the real world. While I spend much of my time building immersive experiences in Unreal Engine 5 or designing clean branding and assets in Affinity and Adobe, my love for creating extends far beyond the digital space.</p>
-            <p>I genuinely enjoy carpentry, building, and fixing physical items. Understanding how structures are built from the ground up constantly informs my digital design logic. To continue expanding my hands-on skill set, I am heading to Amarillo College this August to begin an advanced certificate in welding.</p>
-            <p>Whether I am visual scripting a complex game mechanic, laying out typography, or fabricating with raw materials, I am driven by the process of problem-solving and high-quality creation.</p>
+            <p>I am a 24-year-old digital artist focused on creating compelling visual content through a combination of digital and physical media.</p>
         </div>
-        
-        <!-- COLUMN 2: Core Skills -->
+
         <div class="about-skills reveal reveal-stagger">
             <h3>Core Skills</h3>
             <ul class="skills-list">
@@ -256,7 +261,6 @@
             </ul>
         </div>
 
-        <!-- COLUMN 3: Photo -->
         <img src="images/Me&MC.webp" alt="My fiancé and me." class="about-img reveal reveal-stagger">
 
     </div>
@@ -265,11 +269,10 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-section reveal">
         <h2 class="section-title">Get In Touch</h2>
-        
+
         <div class="contact-content">
             <p>I am currently open to new opportunities and freelance projects. Drop a message below!</p>
-            
-            <!-- Formspree Contact Form -->
+
             <form id="contact-form" action="https://formspree.io/f/xbdnywpe" method="POST" class="contact-form">
                 <div class="form-group">
                     <input type="text" name="name" placeholder="Your Name" data-bwignore required>
@@ -281,14 +284,16 @@
                     <textarea name="message" rows="5" placeholder="Your Message" data-bwignore required></textarea>
                 </div>
                 <button type="submit" class="btn">Send Message</button>
-                <p id="form-status" style="margin-top: 1rem; display: none; font-size: 0.95rem;"></p>
+                <p id="form-status" class="form-status" hidden></p>
             </form>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Morgan Caviness</p>
+        <p>2026 Morgan Caviness</p>
     </footer>
+
+<aside id="global-mobile-pill" aria-live="polite" hidden></aside>
 
 <!-- Main Project Modal -->
 <dialog id="project-modal" class="modal">
@@ -309,13 +314,13 @@
 <!-- Lightbox Modal -->
 <dialog id="lightbox-modal" class="lightbox">
     <div id="lightbox-container">
-        <div class="lightbox-hint">Click anywhere or press Esc to exit</div>
-        
+        <div class="lightbox-hint">Click Anywhere or Press Esc to Exit</div>
+
         <div class="lightbox-image-wrapper">
             <img id="lightbox-image" src="" alt="Zoomed Project Image">
             <div id="magnifier"></div>
         </div>
-        
+
         <div id="lightbox-subtitle" class="lightbox-subtitle"></div>
 
         <div class="lightbox-nav-capsule">
@@ -326,6 +331,6 @@
     </div>
 </dialog>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20260805"></script>
 </body>
 </html>
