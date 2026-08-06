@@ -28,6 +28,7 @@ function syncMobileProjectPill(activeCard) {
     if (!activeCard) {
         globalMobilePill.replaceChildren();
         globalMobilePill.classList.remove('visible');
+        globalMobilePill.removeAttribute('aria-label');
         globalMobilePill.hidden = true;
         return;
     }
@@ -36,9 +37,25 @@ function syncMobileProjectPill(activeCard) {
     if (!projectInfo) return;
 
     globalMobilePill.replaceChildren(...Array.from(projectInfo.children, child => child.cloneNode(true)));
+    const projectTitle = projectInfo.querySelector('h3')?.textContent?.trim() ?? 'project';
+    globalMobilePill.setAttribute('aria-label', `Open ${projectTitle} project details`);
     globalMobilePill.hidden = false;
     requestAnimationFrame(() => globalMobilePill.classList.add('visible'));
 }
+
+function openActiveMobileProject() {
+    const activeCard = document.querySelector('.project-card.is-popped');
+    const cardIndex = getVisibleProjectCards().indexOf(activeCard);
+    if (cardIndex >= 0) openProjectByIndex(cardIndex);
+}
+
+globalMobilePill?.addEventListener('click', openActiveMobileProject);
+globalMobilePill?.addEventListener('keydown', event => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+
+    event.preventDefault();
+    openActiveMobileProject();
+});
 
 projectCards.forEach(card => {
     card.addEventListener('mouseenter', () => {

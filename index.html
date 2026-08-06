@@ -54,17 +54,17 @@
     <div class="particle-wrapper">
         <canvas id="particle-canvas"></canvas>
 
+        <div class="status-badge hero-badge">
+            <span class="pulse-dot"></span>
+            Status: Seeking a Design Job
+        </div>
+
     <header class="hero">
         <p class="greeting">Hello, I am</p>
 
         <div class="name-lockup">
             <h1><span class="gradient-text">Morgan Caviness.</span></h1>
             <h2 class="subtitle">Graphic Designer & Game Developer</h2>
-        </div>
-
-        <div class="status-badge hero-badge">
-            <span class="pulse-dot"></span>
-            Status: Seeking a Design Job
         </div>
 
         <p class="hero-description">Specializing in creating engaging digital experiences, combining technical logic with strong visual design.</p>
@@ -89,7 +89,10 @@
                     </div>
                     <div class="hidden-media" hidden>
                         <iframe src="https://player.vimeo.com/video/1211407632?badge=0&byline=0&portrait=0&color=38bdf8" width="560" height="315" allow="autoplay; fullscreen; picture-in-picture"></iframe>
-                        <p>Cully Bubble is a calm gaming experience with a soothing soundtrack and satisfying mechanics.</p>
+                        <p>Cully Bubble is my most recent project, and my first video game. It is currently in development for mobile platforms, with an Android release coming very soon!</p>
+                        <p>My main goal while in developement was to create a fun and engaging experience for children without overstimulating or addictive elements.
+                            There are no ads and no in-app purchases.
+                            While targeted toward children, many adult testers enjoy the game as well.</p>
                         <h4>Screenshots</h4>
                         <div class="carousel">
                             <img src="images/CullyBubble/Screenshots/0.webp" alt="Cully Bubble Screenshot">
@@ -101,7 +104,7 @@
                             <img src="images/CullyBubble/Screenshots/6.webp" alt="Cully Bubble Screenshot">
                             <img src="images/CullyBubble/Screenshots/7.webp" alt="Cully Bubble Screenshot">
                         </div>
-                        <button class="btn" onclick="window.open('https://play.google.com/store/apps/details?id=com.morgancaviness.bubbles', '_blank')">Play Store Page</button>
+                        <button class="btn" onclick="window.open('https://play.google.com/store/apps/details?id=com.morgancaviness.bubbles', '_blank')">Visit the Play Store Page</button>
                         <button class="btn" onclick="window.open('https://groups.google.com/g/bubbles-beta', '_blank')">Join the Android Closed Beta</button>
                     </div>
                 </article>
@@ -110,8 +113,15 @@
                     <img src="images/Typewriter/0-Small.webp" alt="A person typing next to a small device." class="project-image">
                     <div class="project-info">
                         <h3>Typewriter</h3>
-                        <p class="tech-stack">Photography</p>
+                        <p class="tech-stack">Blender • 3D CAD • 3D Printing • Physical • 3D</p>
                         <p>An electronic typewriter I designed and built.</p>
+                    </div>
+                    <div class="hidden-media" hidden>
+                        <div class="sketchfab-embed-wrapper"> <iframe title="E-Typewriter" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/34e4b124dabe458a875596585f46e0dd/embed?autostart=1&transparent=1&ui_theme=dark"> </iframe> </div>
+                        <img src="images/Typewriter/0.webp" alt="A person typing on the typewriter keyboard.">
+                        <img src="images/Typewriter/4.webp" alt="Close-up of the electronic typewriter.">
+                        <img src="images/Typewriter/1.webp" alt="A close-up of the typewriter.">
+                        <img src="images/Typewriter/3.webp" alt="The back of the typewriter.">
                     </div>
                 </article>
 
@@ -137,7 +147,7 @@
                     </div>
                     <div class="hidden-media" hidden>
                         <img src="images/Pitty/Logo.webp" alt="Pitty Logo">
-                        <img src="images/Pitty/Celestial.webp" alt="A colorful version of the logo." data-subtitle="A version just for fun." class="show-caption">
+                        <img src="images/Pitty/Celestial.webp" alt="A colorful version of the logo.">
                     </div>
                 </article>
 
@@ -204,8 +214,15 @@
                     <img src="images/CrystalGoblet/0-Small.webp" alt="More Projects" class="project-image">
                     <div class="project-info">
                         <h3>More Projects</h3>
-                        <p class="tech-stack">Various</p>
-                        <p>A booklet.</p>
+                        <p class="tech-stack">Adobe • InDesign • Typesetting • Graphic Design • Print</p>
+                        <p>A booklet I designed, typeset, and printed.</p>
+                    </div>
+                    <div class="hidden-media format-collage" hidden>
+                        <img src="images/CrystalGoblet/0.webp" alt="A photo of the booklet.">
+                        <img src="images/CrystalGoblet/1.webp" alt="Another photo of the booklet.">
+                        <img src="images/CrystalGoblet/2.webp" alt="Another photo of the booklet.">
+                        <img src="images/CrystalGoblet/3.webp" alt="Another photo of the booklet.">
+                        <img src="images/CrystalGoblet/4.webp" alt="Another photo of the booklet.">
                     </div>
                 </article>
 
@@ -293,7 +310,7 @@
         <p>2026 Morgan Caviness</p>
     </footer>
 
-<aside id="global-mobile-pill" aria-live="polite" hidden></aside>
+<aside id="global-mobile-pill" aria-live="polite" role="button" tabindex="0" hidden></aside>
 
 <!-- Main Project Modal -->
 <dialog id="project-modal" class="modal">
