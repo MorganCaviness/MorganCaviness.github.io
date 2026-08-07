@@ -920,14 +920,16 @@ footer {
     margin-bottom: 0;
 }
 
-#modal-extra-media.collage-mode {
+#modal-extra-media.collage-mode,
+#modal-extra-media .format-collage {
     display: block;
     column-count: 2;
     column-gap: 1.5rem;
     padding-bottom: 1rem;
 }
 
-#modal-extra-media.collage-mode>* {
+#modal-extra-media.collage-mode>*,
+#modal-extra-media .format-collage>* {
     display: block;
     width: 100%;
     height: auto;
@@ -939,7 +941,8 @@ footer {
 }
 
 @media (max-width: 768px) {
-    #modal-extra-media.collage-mode {
+    #modal-extra-media.collage-mode,
+    #modal-extra-media .format-collage {
         column-count: 1;
     }
 }
