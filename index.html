@@ -270,6 +270,10 @@
         <div class="about-text reveal">
             <p>I am a 24-year-old self-taught digital artist and video game developer. I have nearly 10 years of digital design experience with a focus on graphic design. I enjoy finding creative solutions to complex design problems that engage audiences and communicate ideas.</p>
             <p>My background in solo video game development gives my graphic design work a technical edge, and has allowed me to grow and maintain a well rounded skill set. I specialize in graphic design, digital communication, and interactive media, with a focus on complex visual problem solving.</p>
+            <div class="resume-actions">
+                <button id="preview-resume-btn" class="btn" type="button">Preview Resume</button>
+                <a class="resume-download" href="images/Resume2026.pdf" download>Download Resume</a>
+            </div>
         </div>
 
         <div class="about-skills reveal reveal-stagger">
@@ -353,6 +357,18 @@
         <button id="modal-back-btn" class="capsule-btn capsule-back">Back</button>
         <button id="modal-next-btn" class="capsule-btn">Next ›</button>
     </div>
+</dialog>
+
+<!-- Resume Lightbox -->
+<dialog id="resume-modal" class="resume-modal" aria-labelledby="resume-modal-title">
+    <div class="resume-modal-content">
+        <div class="resume-modal-header">
+            <h3 id="resume-modal-title">Morgan Caviness Resume</h3>
+            <a class="resume-download" href="images/Resume2026.pdf" download>Download PDF</a>
+        </div>
+        <iframe id="resume-preview" title="Morgan Caviness Resume" src="images/Resume2026.pdf"></iframe>
+    </div>
+    <button id="close-resume-btn" class="capsule-btn resume-close-btn" type="button">Back</button>
 </dialog>
 
 <!-- Lightbox Modal -->

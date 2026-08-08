@@ -10,6 +10,9 @@ const lightboxSubtitle = document.getElementById('lightbox-subtitle');
 const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
 const lightboxNextBtn = document.getElementById('lightbox-next-btn');
 const lightboxBackBtn = document.getElementById('lightbox-back-btn');
+const resumeModal = document.getElementById('resume-modal');
+const previewResumeBtn = document.getElementById('preview-resume-btn');
+const closeResumeBtn = document.getElementById('close-resume-btn');
 
 const modal = document.getElementById('project-modal');
 const projectCards = document.querySelectorAll('.project-card');
@@ -560,6 +563,16 @@ lightboxModal?.addEventListener('click', () => {
     if (!isSwiping) {
         lightboxModal.close();
     }
+});
+
+previewResumeBtn?.addEventListener('click', () => {
+    resumeModal?.showModal();
+    bringCursorToFront();
+});
+
+closeResumeBtn?.addEventListener('click', () => resumeModal?.close());
+resumeModal?.addEventListener('click', event => {
+    if (event.target === resumeModal) resumeModal.close();
 });
 
 // Project filtering

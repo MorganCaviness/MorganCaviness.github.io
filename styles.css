@@ -343,7 +343,9 @@ h1::after {
     display: inline-block;
     padding: 0.8rem 1.5rem;
     border: 1px solid var(--accent);
+    background-color: transparent;
     color: var(--accent);
+    font: inherit;
     text-decoration: none;
     border-radius: 4px;
     width: max-content;
@@ -664,6 +666,40 @@ h1::after {
     margin-bottom: 1.5rem;
     color: var(--text-muted);
     font-size: 1.1rem;
+}
+
+.resume-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.resume-actions .btn {
+    background-color: var(--accent-alt);
+    border: none;
+    border-radius: 6px;
+    color: var(--bg-color);
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+}
+
+.resume-actions .btn:hover {
+    background-color: var(--accent);
+    color: var(--bg-color);
+    transform: scale(1.02);
+}
+
+.resume-download {
+    color: var(--accent);
+    font-size: 1rem;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.resume-download:hover {
+    color: var(--text-main);
 }
 
 .about-skills h3 {
@@ -1137,6 +1173,84 @@ footer {
     transform: scaleY(-1);
     filter: blur(15px) brightness(0.35);
     z-index: -1;
+}
+
+/* =========================================
+   RESUME LIGHTBOX
+========================================= */
+.resume-modal {
+    border: none;
+    background: transparent;
+    width: min(94vw, 960px);
+    height: min(92vh, 1100px);
+    margin: auto;
+    padding: 0;
+}
+
+.resume-modal::backdrop {
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.resume-modal-content {
+    height: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+}
+
+.resume-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #334155;
+}
+
+.resume-modal-header h3 {
+    color: var(--text-main);
+    font-size: 1.2rem;
+}
+
+#resume-preview {
+    display: block;
+    width: 100%;
+    height: calc(100% - 4.5rem);
+    border: none;
+    background: #fff;
+}
+
+.resume-close-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+}
+
+@media (max-width: 768px) {
+    .resume-modal {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .resume-modal-content {
+        border-radius: 0;
+    }
+
+    .resume-modal-header {
+        padding: 0.85rem 1rem;
+    }
+
+    .resume-modal-header h3 {
+        font-size: 1rem;
+    }
+
+    .resume-close-btn {
+        bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    }
 }
 
 /* =========================================
