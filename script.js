@@ -312,6 +312,11 @@ function initCarousels(container) {
             return;
         }
 
+        // 1. Create the Stage (wraps image track & overlay buttons)
+        const stage = document.createElement('div');
+        stage.className = 'carousel-stage';
+
+        // 2. Create Track & Slides
         const track = document.createElement('div');
         track.classList.add('carousel-track');
         images.forEach(img => {
@@ -319,6 +324,7 @@ function initCarousels(container) {
             track.appendChild(img);
         });
 
+        // 3. Create Navigation Arrow Buttons
         const prevBtn = document.createElement('button');
         prevBtn.className = 'carousel-btn prev';
         prevBtn.innerHTML = '‹';
@@ -327,12 +333,17 @@ function initCarousels(container) {
         nextBtn.className = 'carousel-btn next';
         nextBtn.innerHTML = '›';
 
+        // 4. Create Dots Container
         const dotsContainer = document.createElement('div');
         dotsContainer.className = 'carousel-dots';
 
-        carousel.appendChild(track);
-        carousel.appendChild(prevBtn);
-        carousel.appendChild(nextBtn);
+        // 5. Assemble Stage (Track + Buttons)
+        stage.appendChild(track);
+        stage.appendChild(prevBtn);
+        stage.appendChild(nextBtn);
+
+        // 6. Append Stage and Dots to Carousel
+        carousel.appendChild(stage);
         carousel.appendChild(dotsContainer);
 
         let currentIndex = 0;

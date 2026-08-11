@@ -377,6 +377,20 @@ h1::after {
     transform: scale(1.02);
 }
 
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.modal-content .project-actions .btn {
+    flex: 1 1 220px;
+    width: auto;
+    margin: 0;
+}
+
 /* =========================================
    5. PORTFOLIO GRID
 ========================================= */
@@ -662,40 +676,68 @@ h1::after {
     z-index: 0;
 }
 
-.about-text p {
-    margin-bottom: 1.5rem;
-    color: var(--text-muted);
-    font-size: 1.1rem;
+/* About Section Resume Actions Centering */
+.about-text {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Stretches the container to match the height of the image column */
 }
 
 .resume-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 2rem;
+    align-self: center; /* Horizontally centers the buttons under the text */
+    margin-top: auto; 
+    margin-bottom: auto; /* These two margins absorb the empty space, perfectly centering it vertically! */
 }
 
-.resume-actions .btn {
-    background-color: var(--accent-alt);
-    border: none;
+.btn-group {
+    display: flex;
+    align-items: stretch;
     border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.btn-group:hover {
+    transform: scale(1.02);
+}
+
+.btn-group .btn {
+    margin: 0;
+    border: none;
+    background-color: var(--accent-alt);
     color: var(--bg-color);
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.btn-group .primary-action {
+    padding: 0.8rem 1.25rem;
     font-size: 1rem;
-    padding: 0.8rem 1rem;
+    font-weight: 600;
+}
+
+.btn-group .secondary-action {
+    padding: 0.8rem;
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.btn-group .primary-action:hover,
+.btn-group .secondary-action:hover {
+    background-color: var(--accent);
+}
+
+.btn-group .secondary-action svg {
+    display: block;
 }
 
 .resume-actions .btn:hover {
     background-color: var(--accent);
     color: var(--bg-color);
     transform: scale(1.02);
-}
-
-.resume-download {
-    color: var(--accent);
-    font-size: 1rem;
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
 }
 
 .resume-download:hover {
@@ -741,18 +783,15 @@ h1::after {
     height: 100%;
     object-fit: cover;
     object-position: center;
-
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     display: block;
-
     justify-self: center;
 }
 
 @media (max-width: 968px) {
     .about-content {
         grid-template-columns: 1fr;
-        /* Stacks cleanly: Text -> Skills -> Photo */
         gap: 3rem;
     }
 
@@ -989,10 +1028,28 @@ footer {
 .carousel {
     position: relative;
     width: 100%;
-    overflow: hidden;
+    background-color: transparent;
+    margin-bottom: 0; 
+    
+    /* Prepares the entire container for hover scale */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+/* Triggers hover state for the whole carousel */
+.carousel:hover {
+    transform: scale(1.02);
+}
+
+/* Outer Stage: Holds track and buttons; enforces hardware-accelerated rounded clipping */
+.carousel-stage {
+    position: relative;
+    width: 100%;
     border-radius: var(--radius, 12px);
-    margin-bottom: 1.5rem;
-    background-color: var(--card-bg, #111);
+    overflow: hidden;
+    isolation: isolate;
+    transform: translateZ(0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black); /* Safari corner clipping fix */
 }
 
 .carousel-track {
@@ -1005,77 +1062,109 @@ footer {
 .carousel-slide {
     min-width: 100%;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
+    object-fit: contain; /* Fits the full image without cropping edges */
+    object-position: center;
     display: block;
     user-select: none;
+    border-radius: var(--radius, 12px);
+    background-color: var(--card-bg, #111);
+    
+    /* Strips the inherited shadow to prevent horizontal clipping walls */
+    box-shadow: none !important; 
+    /* Strips inherited margins so the image sits perfectly flush */
+    margin: 0 !important; 
 }
 
+/* Stop the individual image from scaling twice and getting clipped */
+.carousel .carousel-slide:hover,
+.extra-media .carousel:hover img:not(.btn-icon) {
+    transform: none !important;
+}
+
+/* --- Carousel Arrow Buttons --- */
 .carousel-btn {
     position: absolute;
     top: 0;
-    bottom: 0;
-    height: 100%;
+    bottom: 0; /* Fills 100% of image height inside .carousel-stage */
     width: 20%;
     background: transparent;
     color: var(--text-main);
     border: none;
-    border-radius: 0;
     display: flex;
     align-items: center;
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     cursor: none !important;
     z-index: 5;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
     box-shadow: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-.carousel:hover .carousel-btn {
-    opacity: 0.3;
+/* Pseudo-element for smooth gradient hover fade */
+.carousel-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
 .carousel-btn:hover {
     opacity: 1 !important;
     transform: none;
-    background-color: transparent;
+}
+
+.carousel-btn:hover::before {
+    opacity: 1;
 }
 
 .carousel-btn.prev {
     left: 0;
     justify-content: flex-start;
-    padding-left: 1.5rem;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    padding-left: 1.25rem;
 }
 
 .carousel-btn.next {
     right: 0;
     justify-content: flex-end;
-    padding-right: 1.5rem;
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    padding-right: 1.25rem;
 }
 
-/* Dot Indicators */
+/* Gradient hover overlays */
+.carousel-btn.prev::before {
+    background: linear-gradient(to right, rgba(15, 23, 42, 0.75) 0%, transparent 100%);
+}
+
+.carousel-btn.next::before {
+    background: linear-gradient(to left, rgba(15, 23, 42, 0.75) 0%, transparent 100%);
+}
+
+/* --- Dot Indicators --- */
 .carousel-dots {
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 8px;
+    margin-top: 12px;
     z-index: 5;
+    inset: auto;
+    transform: none;
 }
 
 .carousel-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.3);
     cursor: none !important;
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .carousel-dot.active {
-    background: #38bdf8;
+    background: var(--accent);
     transform: scale(1.25);
 }
 
@@ -1182,7 +1271,7 @@ footer {
     border: none;
     background: transparent;
     width: min(94vw, 960px);
-    height: min(92vh, 1100px);
+    height: min(84vh);
     margin: auto;
     padding: 0;
 }
@@ -1200,34 +1289,12 @@ footer {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
 }
 
-.resume-modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid #334155;
-}
-
-.resume-modal-header h3 {
-    color: var(--text-main);
-    font-size: 1.2rem;
-}
-
 #resume-preview {
     display: block;
     width: 100%;
-    height: calc(100% - 4.5rem);
+    height: 100%;
     border: none;
     background: #fff;
-}
-
-.resume-close-btn {
-    position: fixed;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2000;
 }
 
 @media (max-width: 768px) {
@@ -1248,8 +1315,26 @@ footer {
         font-size: 1rem;
     }
 
-    .resume-close-btn {
-        bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    /* Custom Mobile About Section Ordering */
+    .about-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about-text {
+        display: contents; /* Removes the container barrier on mobile so we can interleave elements */
+    }
+
+    .about-image {
+        order: 10; /* Drops the image below the paragraph and skills */
+        margin: 2rem 0; 
+    }
+
+    .resume-actions {
+        order: 11; /* Drops the buttons below the image */
+        margin: 1rem auto 0 auto;
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -1654,7 +1739,6 @@ body.retro-mode::after {
     transform: scale(0.95);
 }
 
-/* Stylized Back Button */
 .capsule-btn.capsule-back {
     color: var(--accent);
     font-weight: bold;
@@ -1767,6 +1851,8 @@ body.retro-mode::after {
 @keyframes draw-marker {
     to { stroke-dashoffset: 0; }
 }
+
+
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
