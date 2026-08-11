@@ -1918,8 +1918,8 @@ body.retro-mode::after {
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
-    .label-mc { left: -20px; }
-    .label-morgan { right: -10px; }
+    .label-mc { left: -20; }
+    .label-morgan { right: -10; }
 
     .about-image-wrapper {
         margin: 3.5rem auto 1.5rem auto;
