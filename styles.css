@@ -241,9 +241,13 @@ textarea {
 }
 
 .hero {
+    max-width: calc(1400px + 10%); 
+    margin: 0 auto;
+    width: 100%;
     padding: 4rem 5% 2rem 5%;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     animation: fadeIn 1s ease-out;
     position: relative;
 }
@@ -408,10 +412,12 @@ h1::after {
 .section-title {
     font-size: 2rem;
     margin-bottom: 3rem;
-
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
     animation-delay: 0.1s;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .filter-banner {
@@ -442,62 +448,107 @@ h1::after {
     color: var(--bg-color);
 }
 
+/* 1. The Bento Container */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
-    gap: clamp(1.25rem, 2.6vw, 1.75rem);
-    align-items: start;
-    justify-content: center;
+    grid-template-columns: repeat(4, 1fr); /* 4 Columns */
+    grid-auto-rows: 300px;                 /* Sets a standardized base height for the rows */
+    grid-auto-flow: dense;                 /* MAGIC: Packs smaller cards into empty gaps */
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
 }
 
+/* 2. The Base Card (Priority 3 - Standard Size) */
 .project-card {
-    width: min(100%, 400px);
-    justify-self: center;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto; /* Overrides previous aspect-ratio so grid dictates height */
+    
+    /* Keep all your other existing .project-card styling below... */
     background-color: var(--card-bg);
     border-radius: 8px;
     overflow: hidden;
     position: relative;
-    min-height: 250px;
     opacity: 0;
     animation: slideUpCard 0.8s ease-out forwards;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    transform-style: preserve-3d;
-    aspect-ratio: 4 / 3;
-    align-self: start;
-    isolation: isolate;
-    mask-image: radial-gradient(white, black);
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
-/* Desktop card hover states */
-@media (hover: hover) and (pointer: fine) {
-    .project-card.is-hovered {
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+/* Make sure images stretch to fill their new dynamic sizes */
+.project-card .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* =========================================
+   3. THE PRIORITY SIZING LOGIC
+========================================= */
+
+/* Priority 1 (The 1st Card): Massive Hero Square */
+.project-card:nth-child(1) {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+/* Priority 2 (The 2nd & 3rd Cards): Wide Feature Rectangles */
+.project-card:nth-child(2),
+.project-card:nth-child(8) {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.project-card:nth-child(9) {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+/* =========================================
+   4. RESPONSIVE MEDIA QUERIES
+========================================= */
+
+/* Tablet (2 Columns) */
+@media (max-width: 1024px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        grid-auto-rows: 280px; 
+    }
+    
+    /* Let the 1st card remain a massive square (takes up full width of 2 columns) */
+    .project-card:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
     }
 
-    .project-card .project-image {
-        border-radius: 0;
+    /* Wide feature cards take up full width but standard height */
+    .project-card:nth-child(2),
+    .project-card:nth-child(3),
+    .project-card:nth-child(8) {
+        grid-column: span 2;
+        grid-row: span 1;
     }
 
-    .project-card.is-hovered .project-image {
-        transform: scale(1.05);
+    .project-card:nth-child(9) {
+        grid-column: span 1;
+        grid-row: span 2;
     }
+}
 
-    .project-card.is-hovered .project-info {
-        opacity: 1;
+/* Mobile (1 Column) - Everything flattens out cleanly */
+@media (max-width: 600px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 250px; 
     }
-
-    .project-card.is-hovered::before {
-        content: '';
-        position: absolute;
-        inset: -8%;
-        border-radius: inherit;
-        background: radial-gradient(circle, rgba(2, 6, 23, 0.2) 0%, rgba(2, 6, 23, 0.58) 58%, rgba(2, 6, 23, 0.84) 100%);
-        pointer-events: none;
-        z-index: 1;
+    
+    /* Force every card, regardless of priority, to be a standard block */
+    .project-card:nth-child(n) {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
     }
 }
 
@@ -540,6 +591,13 @@ h1::after {
 .project-card.is-hovered .project-info,
 .project-card.is-popped .project-info {
     opacity: 1;
+}
+
+/* Example: Find your hover state and add the tablet-focus class separated by a comma */
+.project-card:hover .project-info,
+.project-card.tablet-focus .project-info {
+    opacity: 1;
+    /* your other reveal styles... */
 }
 
 .project-card.is-hovered .project-image,
@@ -674,6 +732,7 @@ h1::after {
     background-color: #0b1120;
     position: relative;
     z-index: 0;
+    margin: 0 auto;
 }
 
 /* About Section Resume Actions Centering */
@@ -772,9 +831,10 @@ h1::after {
     display: grid;
     grid-template-columns: 2fr 1fr 1.5fr;
     gap: 4rem;
-    max-width: 100%;
-    margin: 0;
     align-items: stretch;
+    max-width: 1400px; 
+    margin: 0 auto;    
+    width: 100%;
 }
 
 .about-img {
@@ -1335,6 +1395,7 @@ footer {
         margin: 1rem auto 0 auto;
         width: 100%;
         justify-content: center;
+        display: flex;
     }
 }
 
