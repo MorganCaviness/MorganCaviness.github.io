@@ -708,6 +708,7 @@ contactForm?.addEventListener('submit', async (e) => {
 });
 
 // Mobile card focus
+let currentPoppedCard = null;
 
 function applyDynamicTilt() {
     const isDesktopHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -793,6 +794,13 @@ function applyDynamicTilt() {
         card.classList.toggle('is-popped', isPopped);
         if (isPopped) activeCard = card;
     });
+
+    if (activeCard !== currentPoppedCard) {
+        currentPoppedCard = activeCard;
+        if (activeCard) {
+            triggerHaptic(15); // Fires a light vibration when a new card takes focus
+        }
+    }
 
     if (!activeCard) {
         syncMobileProjectPill(null);
@@ -942,4 +950,45 @@ projectCards.forEach(card => {
         attributeFilter: ['class'],
         attributeOldValue: true
     });
+});
+
+// Tablet Scroll Focus Logic
+window.addEventListener('scroll', () => {
+    // Only run this logic on tablet screen sizes (601px to 1024px)
+    if (window.innerWidth > 600 && window.innerWidth <= 1024) {
+        const cards = document.querySelectorAll('.project-card');
+        const viewportCenter = window.innerHeight / 2;
+
+        cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            // Find the vertical center of the card
+            const cardCenter = rect.top + rect.height / 2;
+            // Calculate distance from the center of the screen
+            const distanceFromCenter = cardCenter - viewportCenter;
+            
+            // Check if this specific card is on the left or right side of the screen
+            const isLeftColumn = rect.left < window.innerWidth / 2;
+            
+            let isActive = false;
+            
+            // The "Hot Zone": 200px above and below the exact center of the screen
+            if (Math.abs(distanceFromCenter) < 200) {
+                // As you scroll down, elements move UP the screen.
+                if (isLeftColumn && distanceFromCenter > 0) {
+                    // 1st Half: Left card focuses when the row is slightly below center
+                    isActive = true;
+                } else if (!isLeftColumn && distanceFromCenter <= 0) {
+                    // 2nd Half: Right card focuses when the row crosses above center
+                    isActive = true;
+                }
+            }
+
+            // Toggle the focus class
+            if (isActive) {
+                card.classList.add('tablet-focus');
+            } else {
+                card.classList.remove('tablet-focus');
+            }
+        });
+    }
 });
