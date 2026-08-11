@@ -1110,6 +1110,7 @@ footer {
     isolation: isolate;
     transform: translateZ(0);
     -webkit-mask-image: -webkit-radial-gradient(white, black); /* Safari corner clipping fix */
+    mask-image: radial-gradient(white, black); /* Ensures proper corner clipping for non-Safari browsers */
 }
 
 .carousel-track {
