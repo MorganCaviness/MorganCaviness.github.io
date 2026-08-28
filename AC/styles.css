@@ -1,0 +1,559 @@
+/* =========================================
+   1. VARIABLES & GLOBAL RESET (Violet Palette)
+========================================= */
+:root {
+    --bg-color: #0d0914; 
+    --text-main: #f8fafc;
+    --text-muted: #c4b5fd; 
+    --accent: #c084fc; 
+    --accent-alt: #a855f7; 
+    --border-subtle: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    cursor: none; /* Hides default cursor */
+}
+
+/* =========================================
+   2. CUSTOM CURSOR
+========================================= */
+a, button, .dropbtn, input, textarea {
+    cursor: none !important;
+}
+
+#custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    inset: auto;
+    border: none;
+    mix-blend-mode: difference;
+    transition: opacity 0.2s ease;
+}
+
+#custom-cursor-dot.text-active {
+    opacity: 0;
+}
+
+#custom-cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    inset: auto;
+    mix-blend-mode: difference;
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, border-radius 0.2s ease;
+}
+
+/* Hover state for buttons/links */
+#custom-cursor-outline.hover-active {
+    width: 50px;
+    height: 50px;
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Text cursor state */
+#custom-cursor-outline.text-active {
+    width: 2px;
+    height: 22px;
+    border-radius: 1px;
+    background-color: #ffffff;
+    border: none;
+}
+
+/* Disable custom cursor on mobile */
+@media (pointer: coarse) {
+    #custom-cursor-dot,
+    #custom-cursor-outline {
+        display: none !important;
+    }
+    * {
+        cursor: auto !important;
+    }
+}
+
+/* =========================================
+   3. BACKGROUND PARTICLES & DEPTH
+========================================= */
+.bg-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    
+    background-image:
+        radial-gradient(circle at 15% 40%, rgba(192, 132, 252, 0.15), transparent 50%),
+        radial-gradient(circle at 85% 20%, rgba(168, 85, 247, 0.15), transparent 50%),
+        radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px);
+    
+    background-size: 100% 100%, 100% 100%, 40px 40px;
+    animation: particleDrift 30s linear infinite;
+}
+
+@keyframes particleDrift {
+    0% { background-position: 0% 0%, 0% 0%, 0px 0px; }
+    100% { background-position: 0% 0%, 0% 0%, 0px -120px; }
+}
+
+/* =========================================
+   4. NAVBAR
+========================================= */
+.template-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1100px;
+    margin: 1.5rem auto;
+    padding: 0.75rem 2rem;
+    
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    
+    background: rgba(13, 9, 20, 0.6);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--border-subtle);
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.site-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links > a, .dropbtn {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 8px 0;
+    transition: color 0.25s ease;
+    position: relative;
+}
+
+.nav-links a:hover, .dropbtn:hover,
+.nav-links a.active, .dropbtn.active {
+    color: var(--accent);
+}
+
+.nav-links a.active::before, .dropbtn.active::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    display: flex;
+    align-items: center;
+    gap: 6px; 
+}
+
+.dropbtn::after {
+    content: '';
+    border: solid var(--text-main);
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2.5px;
+    transform: rotate(45deg); 
+    margin-bottom: 2px;
+    transition: transform 0.3s ease, border-color 0.25s ease;
+}
+
+.dropbtn:hover::after, .dropbtn.active::after {
+    border-color: var(--accent);
+}
+
+.dropdown:hover .dropbtn::after {
+    transform: rotate(-135deg); 
+    margin-bottom: -4px;
+}
+
+.dropdown-content {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-12px) scale(0.96);
+    transform-origin: top center;
+    
+    position: absolute;
+    background: rgba(13, 9, 20, 0.85);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--border-subtle);
+    min-width: 240px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    top: calc(100% + 14px);
+    left: -20px;
+    border-radius: 12px;
+    overflow: hidden;
+    
+    transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.35s;
+}
+
+.dropdown-content a {
+    color: var(--text-main);
+    padding: 12px 18px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(192, 132, 252, 0.15);
+    color: var(--accent);
+}
+
+.dropdown:hover .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 6px 12px;
+    margin-left: 10px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.search-container:hover, 
+.search-container:focus-within {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(192, 132, 252, 0.5); 
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    outline: none;
+    width: 120px;
+    transition: width 0.3s ease;
+}
+
+.search-input:focus {
+    width: 160px;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.search-input::-webkit-search-decoration,
+.search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.search-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    transition: color 0.3s ease;
+}
+
+.search-btn:hover svg {
+    color: var(--accent);
+}
+
+/* =========================================
+   5. HERO BANNER & EMITTER
+========================================= */
+.template-hero {
+    background-color: #0d0914;
+    background-image: linear-gradient(rgba(13, 9, 20, 0.5), rgba(13, 9, 20, 0.9)), url('images/HeaderBanner.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+.template-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-main);
+    margin: 0;
+    text-align: center;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.hero-emitter {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--text-main), var(--accent), transparent);
+    box-shadow: 0 0 15px rgba(192, 132, 252, 0.6), 0 0 30px rgba(192, 132, 252, 0.2);
+    transform: scaleX(0);
+    transform-origin: center;
+    animation: igniteEmitter 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes igniteEmitter {
+    to { transform: scaleX(1); }
+}
+
+/* =========================================
+   6. CONTENT LAYOUT
+========================================= */
+.template-content {
+    max-width: 1250px; /* Expanded from 1050px to widen the text column */
+    margin: 60px auto; 
+    padding: 0 24px;
+    position: relative;
+}
+
+.content-row {
+    display: flex;
+    gap: 60px;
+    margin-bottom: 80px;
+    align-items: center; /* Restored center alignment */
+}
+
+.col-image {
+    /* 40% of 1250px keeps the image exactly the same physical size as before, 
+       while passing all the newly added page width directly to the text. */
+    flex: 0 0 40%; 
+}
+
+.col-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+.col-text {
+    flex: 1;
+}
+
+.content-split {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.split-col {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Typography */
+.name-header {
+    color: var(--accent);
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.section-header {
+    color: var(--accent-alt);
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-top: 0;
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.body-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.major-text {
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.025em;
+    margin-top: 15px;
+    line-height: 1.2;
+}
+
+/* =========================================
+   7. RESPONSIVENESS
+========================================= */
+@media (max-width: 768px) {
+    .template-nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 14px;
+        width: calc(100% - 32px);
+        border-radius: 20px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .search-container {
+        margin-left: 0;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    .search-input:focus {
+        width: 100%;
+    }
+
+    .content-row {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .content-split {
+        flex-direction: column;
+        gap: 60px;
+    }
+    
+    .col-image {
+        width: 100%;
+    }
+    
+    .template-hero {
+        background-attachment: scroll;
+        height: 300px;
+    }
+}
+
+.search-container {
+    position: relative; /* Ensure the dropdown anchors to the search bar */
+}
+
+.search-results {
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    width: 260px;
+    background: rgba(13, 9, 20, 0.85);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.search-results.active {
+    display: flex;
+}
+
+.search-results a {
+    color: var(--text-main);
+    padding: 12px 18px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.search-results a:last-child {
+    border-bottom: none;
+}
+
+.search-results a:hover {
+    background-color: rgba(192, 132, 252, 0.15);
+    color: var(--accent);
+}
