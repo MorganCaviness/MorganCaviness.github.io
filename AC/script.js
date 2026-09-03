@@ -42,17 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     const searchInput = document.getElementById('site-search');
     const searchResults = document.getElementById('search-results');
+    const searchContainer = searchInput.closest('.search-container');
+    const searchButton = searchContainer.querySelector('.search-btn');
+
+    searchButton.addEventListener('click', () => {
+        const isOpen = searchContainer.classList.toggle('is-open');
+        searchButton.setAttribute('aria-expanded', isOpen);
+        if (isOpen) searchInput.focus();
+    });
 
     // List of all pages in your project directory
     const pagesToRoute = [
-        { title: "About Me", url: "index.html" },
-        { title: "SWOT Analysis", url: "swot.html" },
-        { title: "Success Plan", url: "success-plan.html" },
-        { title: "Talents & Ikigai", url: "talents-ikigai.html" },
-        { title: "Goals", url: "goals.html" },
-        { title: "Career Fit", url: "career-fit.html" },
-        { title: "Education & Networking Plan", url: "education-networking.html" },
-        { title: "Final Reflection", url: "final-reflection.html" }
+        { title: "About Me", url: "../AboutMe/" },
+        { title: "SWOT Analysis", url: "../Swot/" },
+        { title: "Success Plan", url: "../SuccessPlan/" },
+        { title: "Talents & Ikigai", url: "../TalentsIkigai/" },
+        { title: "Goals", url: "../Goals/" },
+        { title: "Career Fit", url: "../CareerFit/" },
+        { title: "Education & Networking Plan", url: "../EducationNetworking/" },
+        { title: "Final Reflection", url: "../FinalReflection/" }
     ];
 
     let siteIndex = [];
@@ -121,8 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('click', function(e) {
-        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        if (!searchContainer.contains(e.target)) {
             searchResults.classList.remove('active');
+            searchContainer.classList.remove('is-open');
+            searchButton.setAttribute('aria-expanded', 'false');
         }
     });
 });
