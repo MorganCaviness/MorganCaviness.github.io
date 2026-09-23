@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:affinity="https://www.affinity.studio/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1.068382,0,0,1.068382,-2.347076,-22.880448)">
+        <path d="M242.961,33.501C243.034,28.816 243.024,28.846 243.04,28.441C243.103,26.88 243.54,24.886 262.537,27.208C298.845,31.644 385.747,45.997 443.937,142.228C451.955,155.486 458.734,171.954 458.843,172.431C459.206,174.012 458.746,174.431 446.396,179.21C402.888,196.048 374.609,207.382 373.52,207.609C370.091,208.323 367.793,195.175 355.843,179.238C307.566,114.856 247.555,123.174 243.7,120.236C242.277,119.152 243.538,59.158 242.961,33.501Z" style="fill:rgb(0,106,168);"/>
+        <path d="M381.93,262.5C381.441,231.232 378.439,230.367 373.55,212.488C373.1,210.843 373.862,210.359 380.617,207.827C389.481,204.506 449.518,180.478 450.5,180.497C453.387,180.556 462.167,214.066 463.671,226.48C468.048,262.626 467.145,275.209 461.734,305.542C454.772,344.572 432.146,383.975 415.351,403.365C412.632,406.504 412.326,403.62 409.114,400.965C404.433,397.096 351.392,352.06 350.75,351.325C349.231,349.584 356.312,343.213 362.066,333.256C381.739,299.217 381.551,273.997 381.93,262.5Z" style="fill:rgb(168,76,0);"/>
+        <path d="M265.54,483.93C260.287,484.515 229.977,487.891 199.505,481.476C197.187,480.987 196.522,480.963 196.955,478.58C197.063,477.989 213.023,401.533 213.84,399.693C215.958,394.926 239.555,411.19 294.357,391.106C320.435,381.549 341.998,359.048 345.446,355.45C349.041,351.699 350.015,354.51 364.877,367.073C409.658,404.927 412.554,406.598 411.182,408.285C391.884,432.015 337.524,477.861 265.54,483.93Z" style="fill:rgb(0,159,154);"/>
+        <path d="M207.403,396.878C210.942,398.149 211.155,398.817 210.154,402.407C209.606,404.373 207.172,418.502 198.24,458.432C193.875,477.944 195.284,480.744 191.426,479.789C109.241,459.435 74.617,411.923 56.775,388.31C48.578,377.461 29.257,340.057 31.729,337.739C31.866,337.611 31.792,337.671 77.404,321.242C86.742,317.913 96.08,314.583 105.418,311.253C106.409,310.901 109.677,308.867 110.745,311.386C135.182,369.037 173.865,387.177 207.403,396.878Z" style="fill:rgb(98,126,0);"/>
+        <path d="M17.95,244.523C19.177,227.828 21.794,200.641 40.401,161.454C45.039,151.686 63.027,121.226 66.342,122.879C68.108,123.76 124.185,168.842 129.192,172.867C132.131,175.23 128.486,177.701 125.81,181.719C84.394,243.888 108.196,302.972 108.595,305.487C108.977,307.895 100.335,310.099 63.423,323.289C32.305,334.409 30.212,336.666 28.863,332.38C25.114,320.478 14.187,286.918 17.95,244.523Z" style="fill:rgb(154,0,2);"/>
+        <path d="M224.457,37.059C225.66,36.976 239.003,36.056 239.519,36.464C240.391,37.152 240.278,37.433 240.276,93.5C240.276,118.696 241.003,120.507 237.507,120.651C228.893,121.006 228.963,121.169 220.457,122.231C197.011,125.159 163.023,138.938 138.653,165.64C134.609,170.07 134.559,173.753 129.865,170.027C124.884,166.074 68.457,121.288 67.854,120.309C66.69,118.419 82.394,101.98 94.431,91.424C154.179,39.03 223.648,37.144 224.457,37.059Z" style="fill:rgb(154,36,128);"/>
+    </g>
+    <g transform="matrix(1,0,0,1,14.267144,-21.092354)">
+        <g transform="matrix(0.990054,0.140686,-0.140686,0.990054,23.538994,-65.529041)">
+            <text x="263.055px" y="118.719px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">S</text>
+        </g>
+        <g transform="matrix(0.981425,0.191845,-0.191845,0.981425,33.778481,-79.193205)">
+            <text x="270.929px" y="119.84px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">p</text>
+        </g>
+        <g transform="matrix(0.970953,0.239269,-0.239269,0.970953,44.277844,-92.197596)">
+            <text x="278.312px" y="121.268px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.955913,0.293651,-0.293651,0.955913,57.660991,-107.402379)">
+            <text x="286.606px" y="123.329px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">c</text>
+        </g>
+        <g transform="matrix(0.943077,0.332576,-0.332576,0.943077,68.54896,-119.013656)">
+            <text x="294.306px" y="125.742px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.927846,0.372963,-0.372963,0.927846,80.1303,-129.935036)">
+            <text x="298.347px" y="127.129px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.905302,0.424769,-0.424769,0.905302,97.125123,-144.930715)">
+            <text x="306.323px" y="130.362px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">l</text>
+        </g>
+        <g transform="matrix(0.871756,0.48994,-0.48994,0.871756,121.398813,-163.676286)">
+            <text x="316.046px" y="135.056px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">V</text>
+        </g>
+        <g transform="matrix(0.851046,0.525092,-0.525092,0.851046,136.878197,-174.44402)">
+            <text x="323.035px" y="139.038px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.829589,0.558374,-0.558374,0.829589,151.287308,-183.219712)">
+            <text x="326.666px" y="141.247px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">s</text>
+        </g>
+        <g transform="matrix(0.798899,0.601466,-0.601466,0.798899,172.694519,-195.113965)">
+            <text x="333.263px" y="145.695px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">u</text>
+        </g>
+        <g transform="matrix(0.765906,0.642953,-0.642953,0.765906,195.881947,-206.317813)">
+            <text x="340.074px" y="150.842px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.733218,0.679994,-0.679994,0.733218,219.16649,-215.964144)">
+            <text x="346.583px" y="156.332px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">l</text>
+        </g>
+        <g transform="matrix(0.711576,0.702609,-0.702609,0.711576,235.851191,-222.04959)">
+            <text x="351.845px" y="161.245px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.688099,0.725617,-0.725617,0.688099,251.540495,-226.903738)">
+            <text x="354.812px" y="164.144px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">z</text>
+        </g>
+        <g transform="matrix(0.655453,0.755236,-0.755236,0.655453,274.92997,-233.151887)">
+            <text x="360.116px" y="169.743px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.627279,0.778794,-0.778794,0.627279,295.98108,-237.715846)">
+            <text x="365px" y="175.366px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">t</text>
+        </g>
+        <g transform="matrix(0.604291,0.796764,-0.796764,0.604291,314.645717,-240.978572)">
+            <text x="369.727px" y="181.282px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.562559,0.826757,-0.826757,0.562559,340.433866,-243.957093)">
+            <text x="372.405px" y="184.729px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">o</text>
+        </g>
+        <g transform="matrix(0.499565,0.866276,-0.866276,0.499565,381.09957,-245.768478)">
+            <text x="377.302px" y="191.966px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+    </g>
+    <g transform="matrix(0.414685,0.909965,-0.909965,0.414685,407.901452,-78.874446)">
+        <g transform="matrix(0.992744,0.120247,-0.120247,0.992744,19.708554,-60.069648)">
+            <text x="259.012px" y="118.271px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">N</text>
+        </g>
+        <g transform="matrix(0.98489,0.173179,-0.173179,0.98489,29.919984,-74.16233)">
+            <text x="268.043px" y="119.382px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">u</text>
+        </g>
+        <g transform="matrix(0.971562,0.236784,-0.236784,0.971562,43.587436,-91.204703)">
+            <text x="276.602px" y="120.861px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">m</text>
+        </g>
+        <g transform="matrix(0.953919,0.300064,-0.300064,0.953919,59.354693,-109.237667)">
+            <text x="287.662px" y="123.63px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.93582,0.352477,-0.352477,0.93582,73.914842,-124.010202)">
+            <text x="295.112px" y="125.967px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">r</text>
+        </g>
+        <g transform="matrix(0.92014,0.39159,-0.39159,0.92014,86.466865,-135.970401)">
+            <text x="303.043px" y="129.007px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.9026,0.43048,-0.43048,0.9026,99.06221,-146.511529)">
+            <text x="307.005px" y="130.658px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">c</text>
+        </g>
+        <g transform="matrix(0.877395,0.479769,-0.479769,0.877395,117.329478,-160.715231)">
+            <text x="314.417px" y="134.205px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">c</text>
+        </g>
+        <g transform="matrix(0.849519,0.527557,-0.527557,0.849519,137.115351,-174.376377)">
+            <text x="321.636px" y="138.163px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.819758,0.57271,-0.57271,0.819758,158.195407,-187.241694)">
+            <text x="328.912px" y="142.708px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">l</text>
+        </g>
+        <g transform="matrix(0.77707,0.629414,-0.629414,0.77707,187.913369,-202.641411)">
+            <text x="337.672px" y="148.954px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">R</text>
+        </g>
+        <g transform="matrix(0.744731,0.667364,-0.667364,0.744731,210.945919,-212.736171)">
+            <text x="344.342px" y="154.376px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.713102,0.70106,-0.70106,0.713102,233.300694,-221.056164)">
+            <text x="350.081px" y="159.517px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.680336,0.7329,-0.7329,0.680336,257.059112,-228.495002)">
+            <text x="356.077px" y="165.435px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">s</text>
+        </g>
+        <g transform="matrix(0.647711,0.761886,-0.761886,0.647711,280.609128,-234.479524)">
+            <text x="361.416px" y="171.193px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">o</text>
+        </g>
+        <g transform="matrix(0.613134,0.789979,-0.789979,0.613134,305.972752,-239.506626)">
+            <text x="366.892px" y="177.645px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+        <g transform="matrix(0.576956,0.816776,-0.816776,0.576956,332.972019,-243.28872)">
+            <text x="372.385px" y="184.792px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.529192,0.848502,-0.848502,0.529192,361.828668,-245.355605)">
+            <text x="374.974px" y="188.371px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+        <g transform="matrix(0.469695,0.882829,-0.882829,0.469695,401.131605,-245.348721)">
+            <text x="379.817px" y="196.219px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">g</text>
+        </g>
+    </g>
+    <g transform="matrix(-0.602701,0.797967,-0.797967,-0.602701,622.803224,230.109067)">
+        <g transform="matrix(0.991557,0.129671,-0.129671,0.991557,21.462235,-62.615357)">
+            <text x="261.194px" y="118.507px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">S</text>
+        </g>
+        <g transform="matrix(0.983952,0.178435,-0.178435,0.983952,31.002232,-75.612194)">
+            <text x="269.074px" y="119.545px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.973017,0.230732,-0.230732,0.973017,42.291717,-89.783823)">
+            <text x="276.756px" y="120.929px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">q</text>
+        </g>
+        <g transform="matrix(0.958859,0.283883,-0.283883,0.958859,55.133011,-104.629065)">
+            <text x="285.045px" y="122.901px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">u</text>
+        </g>
+        <g transform="matrix(0.941157,0.337969,-0.337969,0.941157,69.770884,-119.989681)">
+            <text x="293.317px" y="125.373px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.920708,0.390253,-0.390253,0.920708,85.505295,-134.812947)">
+            <text x="300.682px" y="128.009px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+        <g transform="matrix(0.896779,0.44248,-0.44248,0.896779,103.403445,-150.069545)">
+            <text x="309.053px" y="131.595px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">t</text>
+        </g>
+        <g transform="matrix(0.878294,0.47812,-0.47812,0.878294,117.355379,-160.964226)">
+            <text x="315.924px" y="135.033px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.857223,0.514945,-0.514945,0.857223,131.665322,-170.775702)">
+            <text x="319.697px" y="137.047px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.828033,0.560679,-0.560679,0.828033,152.377585,-183.865208)">
+            <text x="327.019px" y="141.473px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">l</text>
+        </g>
+        <g transform="matrix(0.785606,0.618727,-0.618727,0.785606,181.91959,-199.758508)">
+            <text x="335.916px" y="147.625px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">R</text>
+        </g>
+        <g transform="matrix(0.753608,0.657324,-0.657324,0.753608,204.669753,-210.148143)">
+            <text x="342.634px" y="152.935px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.722075,0.691815,-0.691815,0.722075,226.902422,-218.808863)">
+            <text x="348.444px" y="158px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.689306,0.724471,-0.724471,0.689306,250.581074,-226.611926)">
+            <text x="354.518px" y="163.844px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">s</text>
+        </g>
+        <g transform="matrix(0.656449,0.75437,-0.75437,0.656449,274.210145,-232.978758)">
+            <text x="359.956px" y="169.566px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">o</text>
+        </g>
+        <g transform="matrix(0.621813,0.783166,-0.783166,0.621813,299.508459,-238.358478)">
+            <text x="365.493px" y="175.938px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+        <g transform="matrix(0.593298,0.804983,-0.804983,0.593298,322.28345,-242.044027)">
+            <text x="370.991px" y="182.925px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.54545,0.838143,-0.838143,0.54545,351.282563,-244.788837)">
+            <text x="373.666px" y="186.47px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+        <g transform="matrix(0.483951,0.875095,-0.875095,0.483951,391.671375,-245.653734)">
+            <text x="378.684px" y="194.263px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">g</text>
+        </g>
+    </g>
+    <g transform="matrix(-0.992618,-0.121284,0.121284,-0.992618,462.341488,560.365136)">
+        <g transform="matrix(0.968834,0.247712,-0.247712,0.968834,46.446995,-95.021074)">
+            <text x="281.62px" y="122.072px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">I</text>
+        </g>
+        <g transform="matrix(0.957183,0.289485,-0.289485,0.957183,56.554094,-106.171403)">
+            <text x="285.771px" y="123.093px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">d</text>
+        </g>
+        <g transform="matrix(0.939288,0.34313,-0.34313,0.939288,71.25553,-121.461117)">
+            <text x="294.086px" y="125.629px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.91934,0.393464,-0.393464,0.91934,86.595955,-135.8214)">
+            <text x="301.399px" y="128.299px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.884477,0.466584,-0.466584,0.884477,112.23309,-156.911921)">
+            <text x="312.408px" y="133.192px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">G</text>
+        </g>
+        <g transform="matrix(0.857388,0.51467,-0.51467,0.857388,131.622101,-170.767112)">
+            <text x="319.817px" y="137.121px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.828308,0.560272,-0.560272,0.828308,151.937696,-183.552084)">
+            <text x="326.508px" y="141.129px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+        <g transform="matrix(0.796194,0.605041,-0.605041,0.796194,174.697741,-196.166905)">
+            <text x="334px" y="146.23px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.764506,0.644617,-0.644617,0.764506,196.748905,-206.689217)">
+            <text x="340.2px" y="150.935px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">r</text>
+        </g>
+        <g transform="matrix(0.731278,0.682079,-0.682079,0.731278,220.358924,-216.397462)">
+            <text x="346.74px" y="156.463px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.702478,0.711706,-0.711706,0.702478,241.166292,-223.693514)">
+            <text x="352.251px" y="161.601px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">t</text>
+        </g>
+        <g transform="matrix(0.678874,0.734255,-0.734255,0.678874,259.480336,-229.265707)">
+            <text x="357.551px" y="167.018px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.653709,0.756746,-0.756746,0.653709,276.21376,-233.458875)">
+            <text x="360.415px" y="170.074px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">o</text>
+        </g>
+        <g transform="matrix(0.619137,0.785283,-0.785283,0.619137,301.498442,-238.721688)">
+            <text x="365.926px" y="176.462px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+    </g>
+    <g transform="matrix(-0.418724,-0.908114,0.908114,-0.418724,105.587997,591.546085)">
+        <g transform="matrix(0.988545,0.150924,-0.150924,0.988545,25.571093,-68.516318)">
+            <text x="266.527px" y="119.201px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">I</text>
+        </g>
+        <g transform="matrix(0.981425,0.191845,-0.191845,0.981425,33.768024,-79.158108)">
+            <text x="270.743px" y="119.803px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+        <g transform="matrix(0.96842,0.249323,-0.249323,0.96842,46.624983,-94.952285)">
+            <text x="279.714px" y="121.578px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">d</text>
+        </g>
+        <g transform="matrix(0.952502,0.304533,-0.304533,0.952502,60.511832,-110.444614)">
+            <text x="288.14px" y="123.762px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">u</text>
+        </g>
+        <g transform="matrix(0.933435,0.358748,-0.358748,0.933435,75.831,-125.892081)">
+            <text x="296.316px" y="126.396px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">c</text>
+        </g>
+        <g transform="matrix(0.912749,0.408522,-0.408522,0.912749,91.625136,-140.278488)">
+            <text x="303.981px" y="129.361px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">t</text>
+        </g>
+        <g transform="matrix(0.895561,0.444939,-0.444939,0.895561,104.793297,-151.384365)">
+            <text x="310.962px" y="132.532px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.87634,0.481693,-0.481693,0.87634,118.119318,-161.305)">
+            <text x="314.796px" y="134.403px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">v</text>
+        </g>
+        <g transform="matrix(0.848838,0.528653,-0.528653,0.848838,137.673983,-174.75856)">
+            <text x="321.967px" y="138.362px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.806704,0.590956,-0.590956,0.806704,167.122441,-192.146024)">
+            <text x="331.422px" y="144.395px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">R</text>
+        </g>
+        <g transform="matrix(0.775386,0.631488,-0.631488,0.775386,189.320355,-203.333083)">
+            <text x="338.317px" y="149.464px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.74406,0.668113,-0.668113,0.74406,211.300087,-212.865584)">
+            <text x="344.329px" y="154.359px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.711459,0.702728,-0.702728,0.711459,234.677188,-221.542927)">
+            <text x="350.585px" y="160.001px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">s</text>
+        </g>
+        <g transform="matrix(0.678386,0.734706,-0.734706,0.678386,258.258541,-228.818317)">
+            <text x="356.223px" y="165.578px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">o</text>
+        </g>
+        <g transform="matrix(0.643446,0.765492,-0.765492,0.643446,283.521908,-235.120603)">
+            <text x="361.949px" y="171.788px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+        <g transform="matrix(0.617606,0.786488,-0.786488,0.617606,304.646751,-239.360514)">
+            <text x="367.624px" y="178.61px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.58532,0.810803,-0.810803,0.58532,325.390075,-242.359029)">
+            <text x="370.302px" y="181.929px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+        <g transform="matrix(0.52215,0.852854,-0.852854,0.52215,366.722163,-245.538586)">
+            <text x="375.705px" y="189.489px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">g</text>
+        </g>
+    </g>
+    <g transform="matrix(0.49959,-0.866262,0.866262,0.49959,-104.801925,326.971241)">
+        <g transform="matrix(0.980115,0.198429,-0.198429,0.980115,35.19074,-81.030778)">
+            <text x="272.212px" y="120.068px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">V</text>
+        </g>
+        <g transform="matrix(0.971397,0.237461,-0.237461,0.971397,44.034488,-92.165525)">
+            <text x="280.066px" y="121.704px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.961043,0.276398,-0.276398,0.961043,53.274495,-102.606469)">
+            <text x="284.208px" y="122.688px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">s</text>
+        </g>
+        <g transform="matrix(0.944154,0.329506,-0.329506,0.944154,67.339242,-117.52172)">
+            <text x="291.868px" y="124.897px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">u</text>
+        </g>
+        <g transform="matrix(0.923396,0.383848,-0.383848,0.923396,83.52695,-133.058277)">
+            <text x="299.967px" y="127.741px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.900245,0.435384,-0.435384,0.900245,100.842461,-147.99151)">
+            <text x="307.91px" y="131.069px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">l</text>
+        </g>
+        <g transform="matrix(0.865643,0.500661,-0.500661,0.865643,125.721036,-166.717855)">
+            <text x="317.59px" y="135.882px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">C</text>
+        </g>
+        <g transform="matrix(0.836806,0.547499,-0.547499,0.836806,146.083779,-180.045095)">
+            <text x="324.735px" y="140.026px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">o</text>
+        </g>
+        <g transform="matrix(0.799796,0.600272,-0.600272,0.799796,171.357128,-194.296279)">
+            <text x="331.983px" y="144.742px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">m</text>
+        </g>
+        <g transform="matrix(0.760717,0.649083,-0.649083,0.760717,199.495381,-207.90936)">
+            <text x="341.048px" y="151.623px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">p</text>
+        </g>
+        <g transform="matrix(0.731278,0.682079,-0.682079,0.731278,220.358924,-216.397462)">
+            <text x="346.74px" y="156.463px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">a</text>
+        </g>
+        <g transform="matrix(0.696276,0.717774,-0.717774,0.696276,245.206924,-224.943666)">
+            <text x="352.953px" y="162.27px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">r</text>
+        </g>
+        <g transform="matrix(0.671654,0.740865,-0.740865,0.671654,264.737741,-230.684296)">
+            <text x="358.776px" y="168.329px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">i</text>
+        </g>
+        <g transform="matrix(0.647711,0.761886,-0.761886,0.647711,280.83555,-234.542546)">
+            <text x="361.597px" y="171.406px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">s</text>
+        </g>
+        <g transform="matrix(0.615563,0.788088,-0.788088,0.615563,304.392178,-239.243168)">
+            <text x="366.668px" y="177.377px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">o</text>
+        </g>
+        <g transform="matrix(0.565502,0.824747,-0.824747,0.565502,338.271795,-243.753721)">
+            <text x="372.005px" y="184.17px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">n</text>
+        </g>
+    </g>
+    <g transform="matrix(0.49959,-0.866262,0.866262,0.49959,-104.801925,326.971241)">
+        <g transform="matrix(0.875886,0.482518,-0.482518,0.875886,109.793239,-145.812538)">
+            <text x="315.008px" y="134.516px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">S</text>
+        </g>
+        <g transform="matrix(0.847813,0.530295,-0.530295,0.847813,128.746383,-159.86985)">
+            <text x="321.999px" y="138.373px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">p</text>
+        </g>
+        <g transform="matrix(0.819098,0.573653,-0.573653,0.819098,148.290413,-172.72887)">
+            <text x="328.987px" y="142.756px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.789915,0.613217,-0.613217,0.789915,168.069843,-184.181488)">
+            <text x="335.325px" y="147.198px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">e</text>
+        </g>
+        <g transform="matrix(0.758431,0.651754,-0.651754,0.758431,189.339089,-194.93724)">
+            <text x="341.452px" y="151.95px" style="font-family:'BebasNeue-Regular', 'Bebas Neue', sans-serif;font-size:20px;fill:white;">d</text>
+        </g>
+    </g>
+</svg>
