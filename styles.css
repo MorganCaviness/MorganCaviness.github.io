@@ -1927,3 +1927,623 @@ body.retro-mode::after {
         max-width:85%;
     }
 }
+
+/* =========================================
+   EDUCATION & NETWORKING CAREER RESEARCH
+========================================= */
+.education-networking-page {
+    padding-top: 16px;
+}
+
+.career-research-intro {
+    max-width: 920px;
+    margin: 0 auto 54px;
+    text-align: center;
+}
+
+.career-research-intro h2 {
+    margin-bottom: 16px;
+    color: var(--text-main);
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+}
+
+.career-research-intro .lead {
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--text-muted);
+    font-size: 1.08rem;
+    line-height: 1.8;
+}
+
+.career-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 16px;
+    margin-top: 34px;
+}
+
+.overview-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: center;
+    min-height: 112px;
+    padding: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 18px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.overview-card::after {
+    content: '';
+    position: absolute;
+    right: -35px;
+    bottom: -50px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: rgba(56, 189, 248, 0.08);
+    filter: blur(2px);
+}
+
+.overview-card--weld::after {
+    background: rgba(129, 140, 248, 0.1);
+}
+
+.overview-icon {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border-radius: 14px;
+    color: var(--bg-color);
+    background: var(--accent);
+    font-size: 1.35rem;
+    font-weight: 800;
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.2);
+}
+
+.overview-card--weld .overview-icon {
+    background: var(--accent-alt);
+    box-shadow: 0 0 24px rgba(129, 140, 248, 0.2);
+}
+
+.overview-card p {
+    margin-bottom: 2px;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.overview-card h3 {
+    color: var(--text-main);
+    font-size: 1.25rem;
+}
+
+.overview-badge {
+    grid-column: 1 / -1;
+    justify-self: start;
+    padding: 4px 8px;
+    border-radius: 999px;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 0.7rem;
+}
+
+.overview-connector {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 4px;
+}
+
+.overview-connector span {
+    width: 22px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+}
+
+.overview-connector span:nth-child(2) {
+    background: var(--accent-alt);
+}
+
+.overview-connector span:nth-child(3) {
+    background: var(--text-muted);
+}
+
+.eyebrow,
+.career-number {
+    margin-bottom: 10px;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.career-research-section {
+    position: relative;
+    margin-bottom: 68px;
+    padding: 34px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    background: rgba(15, 23, 42, 0.42);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.career-research-section::before {
+    content: '';
+    position: absolute;
+    top: -110px;
+    right: -90px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.15), transparent 68%);
+    pointer-events: none;
+}
+
+.career-research-section--game {
+    border-color: rgba(56, 189, 248, 0.18);
+}
+
+.career-research-section--backup {
+    border-color: rgba(129, 140, 248, 0.18);
+}
+
+.career-research-section--backup::before {
+    background: radial-gradient(circle, rgba(129, 140, 248, 0.16), transparent 68%);
+}
+
+.career-research-heading {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 28px;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.career-research-heading h2 {
+    color: var(--text-main);
+    font-size: clamp(1.8rem, 3vw, 2.75rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+}
+
+.career-subtitle {
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.career-status-stack {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    max-width: 390px;
+}
+
+.status-badge {
+    display: inline-flex;
+    padding: 7px 11px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.035);
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.status-badge--high {
+    border-color: rgba(56, 189, 248, 0.23);
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.07);
+}
+
+.career-research-section--backup .status-badge--high {
+    border-color: rgba(129, 140, 248, 0.28);
+    color: #c4b5fd;
+    background: rgba(129, 140, 248, 0.08);
+}
+
+.career-path {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 24px;
+    padding: 16px;
+    border: 1px solid rgba(56, 189, 248, 0.12);
+    border-radius: 16px;
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.045), rgba(255, 255, 255, 0.015));
+}
+
+.career-path--backup {
+    border-color: rgba(129, 140, 248, 0.15);
+    background: linear-gradient(90deg, rgba(129, 140, 248, 0.055), rgba(255, 255, 255, 0.015));
+}
+
+.path-step {
+    position: relative;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.65);
+}
+
+.path-step > span {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.career-path--backup .path-step > span {
+    color: #c4b5fd;
+}
+
+.path-step p {
+    margin-bottom: 2px;
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.path-step strong {
+    color: var(--text-main);
+    font-size: 0.86rem;
+}
+
+.path-arrow {
+    color: var(--text-muted);
+    font-size: 1.25rem;
+}
+
+.career-fact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.career-fact {
+    min-height: 140px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.career-fact--feature {
+    border-color: rgba(56, 189, 248, 0.24);
+    background: rgba(56, 189, 248, 0.055);
+}
+
+.career-fact__label {
+    margin-bottom: 8px;
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.career-fact h3 {
+    margin-bottom: 8px;
+    color: var(--text-main);
+    font-size: 1.12rem;
+    line-height: 1.35;
+}
+
+.career-fact p:last-child {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.career-research-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.research-card {
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 3px solid var(--accent-alt);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.research-card--primary {
+    border-left-color: var(--accent);
+}
+
+.research-card--fit {
+    border-left-color: rgba(129, 140, 248, 0.8);
+}
+
+.research-card--gap {
+    border-left-color: rgba(255, 255, 255, 0.4);
+}
+
+.card-heading-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.card-tag {
+    flex: 0 0 auto;
+    padding: 5px 9px;
+    border: 1px solid rgba(56, 189, 248, 0.22);
+    border-radius: 999px;
+    color: var(--accent);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.research-card h3 {
+    margin-bottom: 16px;
+    color: var(--text-main);
+    font-size: 1.25rem;
+}
+
+.research-card p,
+.research-card li {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+}
+
+.research-card p {
+    margin-bottom: 13px;
+}
+
+.research-card p:last-child {
+    margin-bottom: 0;
+}
+
+.research-card p strong,
+.research-card li strong {
+    color: var(--text-main);
+}
+
+.card-intro {
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.recommendation-list {
+    display: grid;
+    gap: 12px;
+    margin: 16px 0 0;
+    padding-left: 1.35rem;
+}
+
+.course-chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0 20px;
+}
+
+.course-chip-list span {
+    padding: 5px 9px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.12);
+    color: var(--text-main);
+    font-family: monospace;
+    font-size: 0.76rem;
+}
+
+.source-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.source-links a {
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: rgba(56, 189, 248, 0.08);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.source-links a:hover {
+    background: rgba(56, 189, 248, 0.16);
+    color: var(--text-main);
+}
+
+.fit-list,
+.gap-list {
+    display: grid;
+    gap: 12px;
+}
+
+.fit-list > div,
+.gap-list > div {
+    padding: 12px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.fit-list strong,
+.gap-list strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+.fit-list p,
+.gap-list p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    line-height: 1.6;
+}
+
+.career-research-summary {
+    padding: 34px;
+    border: 1px solid rgba(192, 132, 252, 0.24);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.07), rgba(129, 140, 248, 0.08));
+}
+
+.career-research-summary h2 {
+    margin-bottom: 24px;
+    color: var(--text-main);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.career-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.career-summary-grid article {
+    padding: 22px;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.5);
+}
+
+.career-summary-grid h3 {
+    margin-bottom: 10px;
+    color: var(--accent);
+    font-size: 1.12rem;
+}
+
+.career-summary-grid p {
+    color: var(--text-muted);
+    line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+    .career-research-section,
+    .career-research-summary {
+        padding: 24px;
+    }
+
+    .career-research-heading {
+        display: block;
+    }
+
+    .career-status-stack {
+        justify-content: flex-start;
+        margin-top: 16px;
+    }
+
+    .career-path {
+        grid-template-columns: 1fr;
+    }
+
+    .path-arrow {
+        transform: rotate(90deg);
+    }
+
+    .career-fact-grid,
+    .career-research-grid,
+    .career-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .career-fact {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 560px) {
+    .career-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .overview-connector {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .overview-connector span {
+        width: 28px;
+    }
+
+    .career-research-section,
+    .career-research-summary {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .career-research-intro {
+        margin-bottom: 38px;
+        text-align: left;
+    }
+
+    .card-heading-row {
+        display: block;
+    }
+
+    .card-tag {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .research-card {
+        padding: 20px;
+    }
+}
+    .education-networking-page {
+        margin-top: 10px;
+    }
+
+    .career-research-section,
+    .career-research-summary {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .career-research-intro {
+        margin-bottom: 38px;
+        text-align: left;
+    }
+
+    .card-heading-row {
+        display: block;
+    }
+
+    .card-tag {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .research-card {
+        padding: 20px;
+    }
+}
